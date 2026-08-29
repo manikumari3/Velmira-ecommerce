@@ -2,7 +2,7 @@
 
 Velmira is a full-stack e-commerce web application designed to provide a smooth, modern, and user-friendly online shopping experience.
 
-## 🚀 Features
+##  Features
 
 - User Registration and Login
 - Product Listing
@@ -28,7 +28,7 @@ Velmira is a full-stack e-commerce web application designed to provide a smooth,
 - MongoDB Database
 - REST API
 
-## 🛠️ Technologies & Skills Used
+##  Technologies & Skills Used
 
 ### Frontend
 - HTML5
