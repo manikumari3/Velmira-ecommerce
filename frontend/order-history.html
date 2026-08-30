@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Order History | Velmira</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo">
+
+            Vel<span>mira</span>
+
+        </a>
+
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search products..."
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="nav-actions">
+
+
+            <a
+                href="products.html"
+                class="nav-icon"
+                title="Products">
+
+                <i class="fa-solid fa-store"></i>
+
+            </a>
+
+
+            <a
+                href="wishlist.html"
+                class="nav-icon"
+                title="Wishlist">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="nav-icon cart"
+                title="Cart">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span id="cartCount">0</span>
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="account">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>Account</span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+
+    <section class="section order-history-page">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    VELMIRA
+                </p>
+
+
+                <h1>
+                    My Orders
+                </h1>
+
+
+                <p>
+                    View your previous orders and order details.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORDERS WILL APPEAR HERE -->
+
+        <div id="ordersContainer">
+
+            <div class="empty-cart">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <h2>
+                    Loading orders...
+                </h2>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Velmira. All rights reserved.
+        </p>
+
+
+        <p>
+            Secure shopping · Easy returns · Fast delivery
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ================= ORDER HISTORY SCRIPT ================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+
+        console.log(
+            "ORDER HISTORY PAGE LOADED"
+        );
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const ordersContainer =
+            document.getElementById(
+                "ordersContainer"
+            );
+
+
+        const cartCount =
+            document.getElementById(
+                "cartCount"
+            );
+
+
+
+        /* =========================================
+           CART COUNT
+        ========================================= */
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "velmiraCart"
+                )
+            ) || [];
+
+
+        if (cartCount) {
+
+            cartCount.textContent =
+                cart.length;
+
+        }
+
+
+
+        /* =========================================
+           API
+        ========================================= */
+
+        const API_URL =
+            "http://localhost:5000/api/orders";
+
+
+        try {
+
+
+            console.log(
+                "Fetching orders..."
+            );
+
+
+            const response =
+                await fetch(API_URL);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Order API returned an error"
+                );
+
+            }
+
+
+            const orders =
+                await response.json();
+
+
+            console.log(
+                "ORDERS RECEIVED:",
+                orders
+            );
+
+
+
+            /* =========================================
+               NO ORDERS
+            ========================================= */
+
+            if (
+                !Array.isArray(orders) ||
+                orders.length === 0
+            ) {
+
+
+                ordersContainer.innerHTML = `
+
+                    <div class="empty-cart">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        <h2>
+                            No orders yet
+                        </h2>
+
+                        <p>
+                            You haven't placed any orders yet.
+                        </p>
+
+                        <a
+                            href="products.html"
+                            class="btn primary">
+
+                            Start Shopping
+
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+
+            /* =========================================
+               DISPLAY ORDERS
+            ========================================= */
+
+            ordersContainer.innerHTML =
+                orders.map(
+                    function (order, index) {
+
+
+                        /* -------------------------
+                           DATE
+                        ------------------------- */
+
+                        let formattedDate =
+                            "Date unavailable";
+
+
+                        if (order.createdAt) {
+
+                            const orderDate =
+                                new Date(
+                                    order.createdAt
+                                );
+
+
+                            if (
+                                !isNaN(
+                                    orderDate.getTime()
+                                )
+                            ) {
+
+                                formattedDate =
+                                    orderDate.toLocaleDateString(
+                                        "en-IN",
+                                        {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric"
+                                        }
+                                    );
+
+                            }
+
+                        }
+
+
+
+                        /* -------------------------
+                           TIME
+                        ------------------------- */
+
+                        let formattedTime =
+                            "";
+
+
+                        if (order.createdAt) {
+
+                            const orderDate =
+                                new Date(
+                                    order.createdAt
+                                );
+
+
+                            if (
+                                !isNaN(
+                                    orderDate.getTime()
+                                )
+                            ) {
+
+                                formattedTime =
+                                    orderDate.toLocaleTimeString(
+                                        "en-IN",
+                                        {
+                                            hour: "2-digit",
+                                            minute: "2-digit"
+                                        }
+                                    );
+
+                            }
+
+                        }
+
+
+
+                        /* -------------------------
+                           PRODUCTS
+                        ------------------------- */
+
+                        const products =
+                            Array.isArray(
+                                order.products
+                            )
+                                ? order.products
+                                : [];
+
+
+                        const productCount =
+                            products.length;
+
+
+
+                        /* -------------------------
+                           PRODUCT HTML
+                        ------------------------- */
+
+                        const productsHTML =
+                            products.map(
+                                function (product) {
+
+
+                                    const price =
+                                        Number(
+                                            product.price
+                                        ) || 0;
+
+
+                                    const quantity =
+                                        Number(
+                                            product.quantity
+                                        ) || 1;
+
+
+                                    return `
+
+                                        <div class="order-product">
+
+                                            <img
+                                                src="${product.image || ""}"
+                                                alt="${product.name || "Product"}">
+
+
+                                            <div>
+
+                                                <h4>
+                                                    ${product.name || "Product"}
+                                                </h4>
+
+
+                                                <p>
+                                                    ${product.category || "General"}
+                                                </p>
+
+
+                                                <p>
+                                                    Quantity:
+                                                    ${quantity}
+                                                </p>
+
+
+                                                <strong>
+                                                    ₹${price.toLocaleString("en-IN")}
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+                                    `;
+
+                                }
+                            ).join("");
+
+
+
+                        /* -------------------------
+                           TOTAL
+                        ------------------------- */
+
+                        const total =
+                            Number(
+                                order.totalAmount
+                            ) || 0;
+
+
+
+                        /* -------------------------
+                           ORDER ID
+                        ------------------------- */
+
+                        const orderId =
+                            order._id
+                                ? String(
+                                    order._id
+                                ).slice(-8)
+                                : String(
+                                    index + 1
+                                );
+
+
+
+                        /* -------------------------
+                           CUSTOMER
+                        ------------------------- */
+
+                        const customer =
+                            order.customer || {};
+
+
+
+                        /* -------------------------
+                           RETURN CARD
+                        ------------------------- */
+
+                        return `
+
+                            <div class="order-card">
+
+
+                                <!-- HEADER -->
+
+                                <div class="order-card-header">
+
+
+                                    <div>
+
+                                        <span class="order-label">
+
+                                            ORDER #${orderId}
+
+                                        </span>
+
+
+                                        <h2>
+
+                                            ₹${total.toLocaleString("en-IN")}
+
+                                        </h2>
+
+                                    </div>
+
+
+
+                                    <div class="order-status">
+
+                                        <i
+                                            class="fa-solid fa-circle-check">
+                                        </i>
+
+                                        Order Placed
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <!-- ORDER META -->
+
+                                <div class="order-meta">
+
+
+                                    <div>
+
+                                        <i
+                                            class="fa-regular fa-calendar">
+                                        </i>
+
+                                        <span>
+
+                                            ${formattedDate}
+
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <i
+                                            class="fa-regular fa-clock">
+                                        </i>
+
+                                        <span>
+
+                                            ${formattedTime}
+
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <div>
+
+                                        <i
+                                            class="fa-solid fa-box">
+                                        </i>
+
+                                        <span>
+
+                                            ${productCount}
+
+                                            ${
+                                                productCount === 1
+                                                    ? "Product"
+                                                    : "Products"
+                                            }
+
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <!-- PRODUCTS -->
+
+                                <div class="order-products">
+
+                                    ${productsHTML}
+
+                                </div>
+
+
+
+                                <!-- CUSTOMER -->
+
+                                <div
+                                    class="order-customer"
+                                    style="
+                                        margin-top:20px;
+                                        padding-top:20px;
+                                        border-top:1px solid rgba(0,0,0,0.08);
+                                    ">
+
+
+                                    <h3>
+
+                                        Delivery Details
+
+                                    </h3>
+
+
+                                    <p>
+
+                                        <strong>
+                                            ${customer.name || ""}
+                                        </strong>
+
+                                    </p>
+
+
+                                    <p>
+
+                                        ${customer.address || ""}
+
+                                        ${
+                                            customer.city
+                                                ? ", " + customer.city
+                                                : ""
+                                        }
+
+                                    </p>
+
+
+                                    <p>
+
+                                        ${
+                                            customer.pincode
+                                                ? "PIN: " + customer.pincode
+                                                : ""
+                                        }
+
+                                    </p>
+
+
+                                </div>
+
+
+
+                                <!-- FOOTER -->
+
+                                <div class="order-card-footer">
+
+
+                                    <span>
+
+                                        Total Amount
+
+                                    </span>
+
+
+                                    <strong>
+
+                                        ₹${total.toLocaleString("en-IN")}
+
+                                    </strong>
+
+
+                                </div>
+
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("");
+
+
+        }
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        catch (error) {
+
+
+            console.error(
+                "ORDER HISTORY ERROR:",
+                error
+            );
+
+
+            ordersContainer.innerHTML = `
+
+                <div class="empty-cart">
+
+                    <i
+                        class="fa-solid fa-triangle-exclamation">
+                    </i>
+
+
+                    <h2>
+                        Unable to load orders
+                    </h2>
+
+
+                    <p>
+                        Please make sure the Velmira backend is running.
+                    </p>
+
+
+                    <button
+                        class="btn primary"
+                        onclick="location.reload()">
+
+                        Try Again
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>

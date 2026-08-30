@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Product | Velmira</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+    /* =========================================
+       PROFESSIONAL PRODUCT IMAGE
+    ========================================= */
+
+    .product-detail-image {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        height: 520px;
+        margin: 0 auto;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #f5f3ef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-detail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        padding: 25px;
+        box-sizing: border-box;
+    }
+
+    /* Badge */
+
+    .product-detail-image .badge {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        z-index: 3;
+        background: #222;
+        color: #fff;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+    /* Wishlist heart */
+
+    .product-detail-image .wishlist {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 3;
+        width: 42px;
+        height: 42px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.2s ease;
+    }
+
+    .product-detail-image .wishlist:hover {
+        transform: scale(1.06);
+    }
+
+    /* Mobile */
+
+    @media (max-width: 768px) {
+
+        .product-detail-image {
+            max-width: 100%;
+            height: 380px;
+            border-radius: 16px;
+        }
+
+        .product-detail-image img {
+            padding: 20px;
+        }
+
+    }
+
+    @media (max-width: 480px) {
+
+        .product-detail-image {
+            height: 320px;
+        }
+
+        .product-detail-image img {
+            padding: 15px;
+        }
+
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<header class="header">
+
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Vel<span>mira</span>
+    </a>
+
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            placeholder="Search products..."
+            autocomplete="off">
+
+    </div>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html" class="nav-icon">
+
+            <i class="fa-regular fa-heart"></i>
+
+        </a>
+
+
+        <a href="cart.html" class="nav-icon cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>0</span>
+
+        </a>
+
+
+        <a href="login.html" class="account">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Account</span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- CATEGORY NAV -->
+
+<div class="category-nav">
+
+    <a href="products.html">
+        All
+    </a>
+
+    <a href="products.html?category=Electronics">
+        Electronics
+    </a>
+
+    <a href="products.html?category=Fashion">
+        Fashion
+    </a>
+
+    <a href="products.html?category=Beauty">
+        Beauty
+    </a>
+
+    <a href="products.html?category=Home%20%26%20Kitchen">
+        Home & Kitchen
+    </a>
+
+    <a href="products.html?category=Grocery">
+        Grocery
+    </a>
+
+    <a href="products.html?category=Sports">
+        Sports
+    </a>
+
+    <a href="products.html?category=Books">
+        Books
+    </a>
+
+</div>
+
+
+</header>
+
+<main>
+
+
+<section class="section product-detail-section">
+
+
+    <!-- BACK BUTTON -->
+
+    <a href="products.html" class="back-link">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Products
+
+    </a>
+
+
+    <!-- PRODUCT -->
+
+    <div
+        class="product-detail"
+        id="productDetail">
+
+        <div class="product-detail-loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>
+                Loading product...
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-grid">
+
+
+    <!-- BRAND -->
+
+    <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+
+            <span>Velmira</span>
+
+        </a>
+
+        <p>
+            Your everyday marketplace for everything
+            you need, want and love.
+        </p>
+
+
+        <div class="socials">
+
+            <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SHOP -->
+
+    <div>
+
+        <h4>
+            Shop
+        </h4>
+
+        <a href="products.html">
+            All Products
+        </a>
+
+        <a href="products.html?category=Electronics">
+            Electronics
+        </a>
+
+        <a href="products.html?category=Fashion">
+            Fashion
+        </a>
+
+        <a href="products.html?category=Beauty">
+            Beauty
+        </a>
+
+    </div>
+
+
+
+    <!-- HELP -->
+
+    <div>
+
+        <h4>
+            Help
+        </h4>
+
+        <a href="#">
+            Contact Us
+        </a>
+
+        <a href="#">
+            Shipping
+        </a>
+
+        <a href="#">
+            Returns
+        </a>
+
+        <a href="#">
+            FAQs
+        </a>
+
+    </div>
+
+
+
+    <!-- VELMIRA -->
+
+    <div>
+
+        <h4>
+            Velmira
+        </h4>
+
+        <a href="#">
+            About Us
+        </a>
+
+        <a href="#">
+            Privacy Policy
+        </a>
+
+        <a href="#">
+            Terms
+        </a>
+
+        <a href="#">
+            Careers
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- FOOTER BOTTOM -->
+
+<div class="footer-bottom">
+
+    <p>
+        © 2026 Velmira. All rights reserved.
+    </p>
+
+    <p>
+        Made for everyday shopping.
+    </p>
+
+</div>
+
+
+</footer>
+
+<script src="js/main.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const productDetail =
+        document.getElementById("productDetail");
+
+
+    /* =========================================
+       PRODUCT ID
+    ========================================= */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const productId =
+        params.get("id");
+
+
+    /* =========================================
+       NO PRODUCT ID
+    ========================================= */
+
+    if (!productId) {
+
+        productDetail.innerHTML = `
+
+            <div class="empty-cart">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <h2>
+                    Product not found
+                </h2>
+
+                <p>
+                    No product was selected.
+                </p>
+
+                <a
+                    href="products.html"
+                    class="btn primary">
+
+                    Browse Products
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    /* =========================================
+       LOAD PRODUCT
+    ========================================= */
+
+    try {
+
+
+        const response =
+            await fetch(
+                `http://localhost:5000/api/products/${encodeURIComponent(productId)}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Product not found"
+            );
+
+        }
+
+
+        const product =
+            await response.json();
+
+
+
+        /* =========================================
+           PRODUCT DATA
+        ========================================= */
+
+        const price =
+            Number(product.price) || 0;
+
+
+        const oldPrice =
+            Number(product.oldPrice) ||
+            price;
+
+
+        const discount =
+            oldPrice > price
+                ? Math.round(
+                    (
+                        (oldPrice - price) /
+                        oldPrice
+                    ) * 100
+                )
+                : 0;
+
+
+        const rating =
+            Number(product.rating) || 0;
+
+
+
+        /* =========================================
+           RENDER PRODUCT
+        ========================================= */
+
+        productDetail.innerHTML = `
+
+            <!-- PRODUCT IMAGE -->
+
+            <div class="product-detail-image">
+
+
+                ${
+                    product.badge
+                    ?
+                    `
+                    <span class="badge">
+
+                        ${escapeHTML(product.badge)}
+
+                    </span>
+                    `
+                    :
+                    ""
+                }
+
+
+                <!-- WISHLIST ICON -->
+
+                <button
+                    class="wishlist"
+                    id="detailWishlist"
+                    type="button"
+                    aria-label="Add to wishlist">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    loading="eager"
+                    onerror="
+                        this.src='https://via.placeholder.com/520x520?text=Velmira';
+                    ">
+
+            </div>
+
+
+
+            <!-- PRODUCT INFORMATION -->
+
+            <div class="product-detail-info">
+
+
+                <span class="product-category">
+
+                    ${escapeHTML(product.category || "General")}
+
+                </span>
+
+
+                <h1>
+
+                    ${escapeHTML(product.name || "Product")}
+
+                </h1>
+
+
+                <!-- RATING -->
+
+                <div class="rating">
+
+                    ★★★★★
+
+                    <span>
+
+                        ${rating.toFixed(1)}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="detail-price">
+
+                    <strong>
+
+                        ₹${price.toLocaleString("en-IN")}
+
+                    </strong>
+
+
+                    ${
+                        oldPrice > price
+                        ?
+                        `
+
+                        <del>
+
+                            ₹${oldPrice.toLocaleString("en-IN")}
+
+                        </del>
+
+
+                        <span class="discount">
+
+                            ${discount}% OFF
+
+                        </span>
+
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <p class="product-description">
+
+                    ${escapeHTML(
+                        product.description ||
+                        "A quality product from Velmira."
+                    )}
+
+                </p>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="product-actions">
+
+
+                    <button
+                        class="btn primary"
+                        id="detailAddCart"
+                        type="button">
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        Add to Cart
+
+                    </button>
+
+
+                    <button
+                        class="btn secondary"
+                        id="detailWishlistButton"
+                        type="button">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                        Wishlist
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- BENEFITS -->
+
+                <div class="product-benefits">
+
+
+                    <div>
+
+                        <i class="fa-solid fa-truck"></i>
+
+                        <span>
+                            Fast Delivery
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-rotate-left"></i>
+
+                        <span>
+                            Easy Returns
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>
+                            Secure Shopping
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+
+        /* =========================================
+           LOCAL STORAGE
+        ========================================= */
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "velmiraCart"
+                )
+            ) || [];
+
+
+        let wishlist =
+            JSON.parse(
+                localStorage.getItem(
+                    "velmiraWishlist"
+                )
+            ) || [];
+
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const cartButton =
+            document.getElementById(
+                "detailAddCart"
+            );
+
+
+        const wishlistButton =
+            document.getElementById(
+                "detailWishlistButton"
+            );
+
+
+        const heartButton =
+            document.getElementById(
+                "detailWishlist"
+            );
+
+
+
+        /* =========================================
+           ADD TO CART
+        ========================================= */
+
+        function addToCart() {
+
+
+            const existing =
+                cart.find(
+                    item =>
+                        String(
+                            item.id ||
+                            item._id
+                        ) ===
+                        String(productId)
+                );
+
+
+            if (existing) {
+
+                existing.quantity =
+                    (
+                        Number(
+                            existing.quantity
+                        ) || 1
+                    ) + 1;
+
+            }
+
+            else {
+
+                cart.push({
+
+                    id: productId,
+
+                    name: product.name,
+
+                    category: product.category,
+
+                    price: price,
+
+                    oldPrice:
+                        oldPrice > price
+                            ? oldPrice
+                            : null,
+
+                    image: product.image,
+
+                    quantity: 1
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "velmiraCart",
+                JSON.stringify(cart)
+            );
+
+
+            updateCartCount();
+
+
+
+            cartButton.innerHTML = `
+
+                <i class="fa-solid fa-check"></i>
+
+                Added to Cart
+
+            `;
+
+
+            setTimeout(
+                () => {
+
+                    cartButton.innerHTML = `
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        Add to Cart
+
+                    `;
+
+                },
+                1200
+            );
+
+        }
+
+
+
+        /* =========================================
+           WISHLIST
+        ========================================= */
+
+        function toggleWishlist() {
+
+
+            const index =
+                wishlist.findIndex(
+                    item =>
+                        String(
+                            item.id ||
+                            item._id
+                        ) ===
+                        String(productId)
+                );
+
+
+            if (index === -1) {
+
+
+                wishlist.push({
+
+                    id: productId,
+
+                    name: product.name,
+
+                    category: product.category,
+
+                    price: price,
+
+                    oldPrice:
+                        oldPrice > price
+                            ? oldPrice
+                            : null,
+
+                    image: product.image
+
+                });
+
+
+                wishlistButton.innerHTML = `
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    Wishlisted
+
+                `;
+
+
+                heartButton.innerHTML = `
+
+                    <i class="fa-solid fa-heart"></i>
+
+                `;
+
+            }
+
+            else {
+
+
+                wishlist.splice(
+                    index,
+                    1
+                );
+
+
+                wishlistButton.innerHTML = `
+
+                    <i class="fa-regular fa-heart"></i>
+
+                    Wishlist
+
+                `;
+
+
+                heartButton.innerHTML = `
+
+                    <i class="fa-regular fa-heart"></i>
+
+                `;
+
+            }
+
+
+            localStorage.setItem(
+                "velmiraWishlist",
+                JSON.stringify(wishlist)
+            );
+
+        }
+
+
+
+        /* =========================================
+           EVENTS
+        ========================================= */
+
+        cartButton.addEventListener(
+            "click",
+            addToCart
+        );
+
+
+        wishlistButton.addEventListener(
+            "click",
+            toggleWishlist
+        );
+
+
+        heartButton.addEventListener(
+            "click",
+            toggleWishlist
+        );
+
+
+
+        /* =========================================
+           INITIAL WISHLIST STATE
+        ========================================= */
+
+        const alreadyWishlisted =
+            wishlist.some(
+                item =>
+                    String(
+                        item.id ||
+                        item._id
+                    ) ===
+                    String(productId)
+            );
+
+
+        if (alreadyWishlisted) {
+
+            wishlistButton.innerHTML = `
+
+                <i class="fa-solid fa-heart"></i>
+
+                Wishlisted
+
+            `;
+
+
+            heartButton.innerHTML = `
+
+                <i class="fa-solid fa-heart"></i>
+
+            `;
+
+        }
+
+
+
+        /* =========================================
+           INITIAL CART COUNT
+        ========================================= */
+
+        updateCartCount();
+
+
+
+        function updateCartCount() {
+
+
+            const currentCart =
+                JSON.parse(
+                    localStorage.getItem(
+                        "velmiraCart"
+                    )
+                ) || [];
+
+
+            const cartCount =
+                document.querySelector(
+                    ".cart span"
+                );
+
+
+            if (cartCount) {
+
+                cartCount.textContent =
+                    currentCart.reduce(
+                        (
+                            total,
+                            item
+                        ) =>
+                            total +
+                            (
+                                Number(
+                                    item.quantity
+                                ) || 1
+                            ),
+                        0
+                    );
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           ESCAPE HTML
+        ========================================= */
+
+        function escapeHTML(value) {
+
+            return String(
+                value || ""
+            )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+        }
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "PRODUCT DETAIL ERROR:",
+            error
+        );
+
+
+        productDetail.innerHTML = `
+
+            <div class="empty-cart">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <h2>
+                    Unable to load product
+                </h2>
+
+                <p>
+                    Please try again.
+                </p>
+
+                <a
+                    href="products.html"
+                    class="btn primary">
+
+                    Back to Products
+
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+
+});
+
+</script>
+
+</body>
+
+</html>

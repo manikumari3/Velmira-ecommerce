@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account | Velmira</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<header class="header">
+
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Vel<span>mira</span>
+    </a>
+
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            placeholder="Search for products, brands and more">
+
+    </div>
+
+
+    <div class="nav-actions">
+
+        <a href="wishlist.html" class="nav-icon">
+
+            <i class="fa-regular fa-heart"></i>
+
+        </a>
+
+
+        <a href="cart.html" class="nav-icon cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>0</span>
+
+        </a>
+
+
+        <a href="login.html" class="account">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Account</span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="category-nav">
+
+    <a href="products.html">
+        All
+    </a>
+
+    <a href="products.html?category=Electronics">
+        Electronics
+    </a>
+
+    <a href="products.html?category=Fashion">
+        Fashion
+    </a>
+
+    <a href="products.html?category=Beauty">
+        Beauty
+    </a>
+
+    <a href="products.html?category=Home%20%26%20Kitchen">
+        Home & Kitchen
+    </a>
+
+    <a href="products.html?category=Grocery">
+        Grocery
+    </a>
+
+    <a href="products.html?category=Sports">
+        Sports
+    </a>
+
+    <a href="products.html?category=Books">
+        Books
+    </a>
+
+    <a href="products.html">
+        More
+    </a>
+
+</div>
+
+
+</header>
+
+<main>
+
+<section class="section">
+
+
+<!-- PAGE HEADING -->
+
+<div class="section-heading">
+
+    <div>
+
+        <p class="eyebrow">
+            WELCOME TO VELMIRA
+        </p>
+
+        <h2>
+            Create Your Account
+        </h2>
+
+        <p>
+            Join Velmira and start shopping everything you need.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- REGISTER AREA -->
+
+<div style="
+    max-width:520px;
+    margin:0 auto;
+">
+
+
+    <!-- REGISTER CARD -->
+
+    <div class="checkout-card">
+
+
+        <div class="checkout-card-heading">
+
+            <span>
+
+                <i class="fa-solid fa-user-plus"></i>
+
+            </span>
+
+
+            <div>
+
+                <h2>
+                    Sign Up
+                </h2>
+
+                <p>
+                    Create your Velmira account below.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REGISTER FORM -->
+
+        <form
+            id="registerForm"
+            style="margin-top:30px;">
+
+
+            <!-- NAME -->
+
+            <div class="form-field">
+
+                <label for="registerName">
+                    Full Name
+                </label>
+
+                <input
+                    id="registerName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div
+                class="form-field"
+                style="margin-top:20px;">
+
+                <label for="registerEmail">
+                    Email Address
+                </label>
+
+                <input
+                    id="registerEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div
+                class="form-field"
+                style="margin-top:20px;">
+
+                <label for="registerPassword">
+                    Password
+                </label>
+
+
+                <div style="
+                    position:relative;
+                ">
+
+                    <input
+                        id="registerPassword"
+                        type="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                        minlength="6"
+                        style="
+                            width:100%;
+                            padding-right:50px;
+                        ">
+
+
+                    <button
+                        type="button"
+                        id="showRegisterPassword"
+                        aria-label="Show password"
+                        style="
+                            position:absolute;
+                            right:15px;
+                            top:50%;
+                            transform:translateY(-50%);
+                            background:none;
+                            border:none;
+                            cursor:pointer;
+                            font-size:16px;
+                        ">
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div
+                class="form-field"
+                style="margin-top:20px;">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+
+                <div style="
+                    position:relative;
+                ">
+
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                        minlength="6"
+                        style="
+                            width:100%;
+                            padding-right:50px;
+                        ">
+
+
+                    <button
+                        type="button"
+                        id="showConfirmPassword"
+                        aria-label="Show confirm password"
+                        style="
+                            position:absolute;
+                            right:15px;
+                            top:50%;
+                            transform:translateY(-50%);
+                            background:none;
+                            border:none;
+                            cursor:pointer;
+                            font-size:16px;
+                        ">
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="registerMessage"
+                style="
+                    display:none;
+                    margin-top:15px;
+                    text-align:center;
+                    font-size:14px;
+                    font-weight:600;
+                ">
+            </p>
+
+
+
+            <!-- REGISTER BUTTON -->
+
+            <button
+                id="registerButton"
+                type="submit"
+                class="btn primary"
+                style="
+                    width:100%;
+                    margin-top:25px;
+                    border:none;
+                    cursor:pointer;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    gap:10px;
+                ">
+
+                Create Account
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- LOGIN LINK -->
+
+    <div
+        style="
+            margin-top:20px;
+            padding:20px;
+            border:1px solid rgba(0,0,0,0.08);
+            border-radius:14px;
+            text-align:center;
+            background:rgba(255,255,255,0.5);
+        ">
+
+
+        <p style="
+            margin:0;
+            opacity:0.75;
+        ">
+
+            Already have an account?
+
+        </p>
+
+
+        <a
+            href="login.html"
+            style="
+                display:inline-block;
+                margin-top:8px;
+                text-decoration:none;
+                font-weight:600;
+            ">
+
+            Login to Velmira
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+
+
+    <!-- CONTINUE SHOPPING -->
+
+    <div
+        style="
+            text-align:center;
+            margin-top:25px;
+        ">
+
+        <a
+            href="products.html"
+            style="
+                text-decoration:none;
+                font-weight:600;
+            ">
+
+            Continue Shopping
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+</main>
+
+<footer>
+
+
+<div class="footer-grid">
+
+
+    <!-- BRAND -->
+
+    <div class="footer-brand">
+
+        <a
+            href="index.html"
+            class="logo">
+
+           <span>Velmira</span>
+
+        </a>
+
+
+        <p>
+
+            Your everyday marketplace for everything
+            you need, want and love.
+
+        </p>
+
+
+        <div class="socials">
+
+            <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SHOP -->
+
+    <div>
+
+        <h4>
+            Shop
+        </h4>
+
+        <a href="products.html">
+            All Products
+        </a>
+
+        <a href="products.html?category=Electronics">
+            Electronics
+        </a>
+
+        <a href="products.html?category=Fashion">
+            Fashion
+        </a>
+
+        <a href="products.html?category=Beauty">
+            Beauty
+        </a>
+
+    </div>
+
+
+
+    <!-- HELP -->
+
+    <div>
+
+        <h4>
+            Help
+        </h4>
+
+        <a href="#">
+            Contact Us
+        </a>
+
+        <a href="#">
+            Shipping
+        </a>
+
+        <a href="#">
+            Returns
+        </a>
+
+        <a href="#">
+            FAQs
+        </a>
+
+    </div>
+
+
+
+    <!-- VELMIRA -->
+
+    <div>
+
+        <h4>
+            Velmira
+        </h4>
+
+        <a href="#">
+            About Us
+        </a>
+
+        <a href="#">
+            Privacy Policy
+        </a>
+
+        <a href="#">
+            Terms
+        </a>
+
+        <a href="#">
+            Careers
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="footer-bottom">
+
+    <p>
+        © 2026 Velmira. All rights reserved.
+    </p>
+
+    <p>
+        Secure shopping · Easy returns · Fast delivery
+    </p>
+
+</div>
+
+
+</footer>
+
+<script src="js/main.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* =========================================
+       CART COUNT
+    ========================================= */
+
+    const cart =
+        JSON.parse(
+            localStorage.getItem("velmiraCart")
+        ) || [];
+
+
+    const cartCount =
+        document.querySelector(".cart span");
+
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            cart.reduce(
+                (total, item) =>
+                    total +
+                    (Number(item.quantity) || 1),
+                0
+            );
+
+    }
+
+
+
+    /* =========================================
+       SHOW / HIDE PASSWORD
+    ========================================= */
+
+    const registerPassword =
+        document.getElementById(
+            "registerPassword"
+        );
+
+
+    const showRegisterPassword =
+        document.getElementById(
+            "showRegisterPassword"
+        );
+
+
+    if (
+        registerPassword &&
+        showRegisterPassword
+    ) {
+
+        showRegisterPassword.addEventListener(
+            "click",
+            () => {
+
+                const icon =
+                    showRegisterPassword.querySelector("i");
+
+
+                if (
+                    registerPassword.type === "password"
+                ) {
+
+                    registerPassword.type =
+                        "text";
+
+                    icon.className =
+                        "fa-regular fa-eye-slash";
+
+                } else {
+
+                    registerPassword.type =
+                        "password";
+
+                    icon.className =
+                        "fa-regular fa-eye";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       SHOW / HIDE CONFIRM PASSWORD
+    ========================================= */
+
+    const confirmPassword =
+        document.getElementById(
+            "confirmPassword"
+        );
+
+
+    const showConfirmPassword =
+        document.getElementById(
+            "showConfirmPassword"
+        );
+
+
+    if (
+        confirmPassword &&
+        showConfirmPassword
+    ) {
+
+        showConfirmPassword.addEventListener(
+            "click",
+            () => {
+
+                const icon =
+                    showConfirmPassword.querySelector("i");
+
+
+                if (
+                    confirmPassword.type === "password"
+                ) {
+
+                    confirmPassword.type =
+                        "text";
+
+                    icon.className =
+                        "fa-regular fa-eye-slash";
+
+                } else {
+
+                    confirmPassword.type =
+                        "password";
+
+                    icon.className =
+                        "fa-regular fa-eye";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       JWT REGISTRATION
+    ========================================= */
+
+    const registerForm =
+        document.getElementById(
+            "registerForm"
+        );
+
+
+    const registerMessage =
+        document.getElementById(
+            "registerMessage"
+        );
+
+
+    const registerButton =
+        document.getElementById(
+            "registerButton"
+        );
+
+
+
+    if (registerForm) {
+
+        registerForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById("registerName")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("registerEmail")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("registerPassword")
+                        .value;
+
+
+                const confirmPasswordValue =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+
+
+                /* =========================
+                   VALIDATION
+                ========================= */
+
+                if (name.length < 2) {
+
+                    registerMessage.textContent =
+                        "Please enter your full name.";
+
+                    registerMessage.style.display =
+                        "block";
+
+                    registerMessage.style.color =
+                        "#c0392b";
+
+                    return;
+
+                }
+
+
+
+                if (password.length < 6) {
+
+                    registerMessage.textContent =
+                        "Password must be at least 6 characters.";
+
+                    registerMessage.style.display =
+                        "block";
+
+                    registerMessage.style.color =
+                        "#c0392b";
+
+                    return;
+
+                }
+
+
+
+                if (
+                    password !==
+                    confirmPasswordValue
+                ) {
+
+                    registerMessage.textContent =
+                        "Passwords do not match.";
+
+                    registerMessage.style.display =
+                        "block";
+
+                    registerMessage.style.color =
+                        "#c0392b";
+
+                    return;
+
+                }
+
+
+
+                /* =========================
+                   RESET MESSAGE
+                ========================= */
+
+                registerMessage.style.display =
+                    "none";
+
+
+                registerButton.disabled =
+                    true;
+
+
+                registerButton.innerHTML =
+                    `
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Creating account...
+                    `;
+
+
+
+                try {
+
+
+                    /* =========================
+                       REGISTER API
+                    ========================= */
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/auth/register",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        name: name,
+                                        email: email,
+                                        password: password
+                                    })
+                            }
+                        );
+
+
+
+                    /* =========================
+                       READ RESPONSE
+                    ========================= */
+
+                    const data =
+                        await response.json();
+
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+
+                    /* =========================
+                       SUCCESS
+                    ========================= */
+
+                    registerMessage.textContent =
+                        "Account created successfully! Redirecting to login...";
+
+                    registerMessage.style.display =
+                        "block";
+
+                    registerMessage.style.color =
+                        "green";
+
+
+
+                    /* =========================
+                       REDIRECT
+                    ========================= */
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "login.html";
+
+                        },
+                        1200
+                    );
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "REGISTER ERROR:",
+                        error
+                    );
+
+
+                    registerMessage.textContent =
+                        error.message ||
+                        "Unable to create account.";
+
+                    registerMessage.style.display =
+                        "block";
+
+                    registerMessage.style.color =
+                        "#c0392b";
+
+
+                    registerButton.disabled =
+                        false;
+
+
+                    registerButton.innerHTML =
+                        `
+                        Create Account
+                        <i class="fa-solid fa-arrow-right"></i>
+                        `;
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

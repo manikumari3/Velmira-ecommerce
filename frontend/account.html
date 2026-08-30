@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Account | Velmira</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        /* =========================================
+           ACCOUNT PAGE
+        ========================================= */
+
+        .account-container {
+
+            max-width: 700px;
+
+            margin: 0 auto;
+
+        }
+
+
+        /* =========================================
+           ACCOUNT DETAILS CARD
+        ========================================= */
+
+        .account-details-card {
+
+            background: rgba(255, 255, 255, 0.7);
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+        }
+
+
+        .account-card-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .account-card-heading > span {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 50%;
+
+            background: #222;
+
+            color: #fff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .account-card-heading h2 {
+
+            margin: 0;
+
+        }
+
+
+        .account-card-heading p {
+
+            margin: 5px 0 0;
+
+            opacity: 0.7;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           ACCOUNT INFORMATION
+        ========================================= */
+
+        .account-info {
+
+            margin-top: 25px;
+
+        }
+
+
+        .account-info-row {
+
+            padding: 16px 0;
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .account-info-row:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+
+        }
+
+
+        .account-info-row small {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.55;
+
+        }
+
+
+        .account-info-row strong {
+
+            display: block;
+
+            margin-top: 6px;
+
+            font-size: 16px;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =========================================
+           ACCOUNT ACTIONS
+        ========================================= */
+
+        .account-action {
+
+            margin-top: 15px;
+
+            padding: 20px;
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background: rgba(255, 255, 255, 0.5);
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .account-action:hover {
+
+            transform: translateY(-2px);
+
+            border-color: rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .account-action-content strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .account-action-content span {
+
+            font-size: 14px;
+
+            opacity: 0.7;
+
+        }
+
+
+        .account-action > i {
+
+            font-size: 18px;
+
+            opacity: 0.7;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        .logout-button {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            border: none;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .account-container {
+
+                width: 100%;
+
+            }
+
+
+            .account-details-card {
+
+                padding: 22px;
+
+            }
+
+
+            .account-action {
+
+                padding: 17px;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .account-details-card {
+
+                padding: 18px;
+
+                border-radius: 15px;
+
+            }
+
+
+            .account-card-heading {
+
+                gap: 12px;
+
+            }
+
+
+            .account-card-heading > span {
+
+                width: 42px;
+
+                height: 42px;
+
+            }
+
+
+            .account-action {
+
+                gap: 12px;
+
+            }
+
+
+            .account-action-content span {
+
+                font-size: 13px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+    <nav class="navbar">
+
+
+        <!-- LOGO -->
+
+        <a href="index.html"
+           class="logo">
+
+            Vel<span>mira</span>
+
+        </a>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search for products, brands and more"
+                autocomplete="off">
+
+        </div>
+
+
+        <!-- NAV ACTIONS -->
+
+        <div class="nav-actions">
+
+
+            <!-- WISHLIST -->
+
+            <a
+                href="wishlist.html"
+                class="nav-icon"
+                title="Wishlist">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </a>
+
+
+            <!-- CART -->
+
+            <a
+                href="cart.html"
+                class="nav-icon cart"
+                title="Cart">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+
+            <!-- ACCOUNT -->
+
+            <a
+                href="account.html"
+                class="account">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span id="accountNavText">
+                    Account
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =================================================
+         CATEGORY NAVIGATION
+    ================================================== -->
+
+    <div class="category-nav">
+
+
+        <a href="products.html">
+            All
+        </a>
+
+
+        <a href="products.html?category=Electronics">
+            Electronics
+        </a>
+
+
+        <a href="products.html?category=Fashion">
+            Fashion
+        </a>
+
+
+        <a href="products.html?category=Beauty">
+            Beauty
+        </a>
+
+
+        <a href="products.html?category=Home%20%26%20Kitchen">
+            Home & Kitchen
+        </a>
+
+
+        <a href="products.html?category=Grocery">
+            Grocery
+        </a>
+
+
+        <a href="products.html?category=Sports">
+            Sports
+        </a>
+
+
+        <a href="products.html?category=Books">
+            Books
+        </a>
+
+
+        <a href="products.html">
+            More
+        </a>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <section class="section">
+
+
+        <!-- =================================================
+             PAGE HEADING
+        ================================================== -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    MY ACCOUNT
+                </p>
+
+
+                <h1>
+
+                    Welcome,
+
+                    <span id="userNameHeading">
+                        User
+                    </span>
+
+                </h1>
+
+
+                <p>
+                    Manage your Velmira account and orders.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACCOUNT CONTAINER
+        ================================================== -->
+
+        <div class="account-container">
+
+
+            <!-- =================================================
+                 ACCOUNT DETAILS
+            ================================================== -->
+
+            <div class="account-details-card">
+
+
+                <div class="account-card-heading">
+
+
+                    <span>
+
+                        <i class="fa-regular fa-user"></i>
+
+                    </span>
+
+
+                    <div>
+
+                        <h2>
+                            Account Details
+                        </h2>
+
+
+                        <p>
+                            Your Velmira account information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- USER INFORMATION -->
+
+                <div class="account-info">
+
+
+                    <!-- NAME -->
+
+                    <div class="account-info-row">
+
+                        <small>
+                            NAME
+                        </small>
+
+
+                        <strong id="userName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="account-info-row">
+
+                        <small>
+                            EMAIL
+                        </small>
+
+
+                        <strong id="userEmail">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ORDER HISTORY
+            ================================================== -->
+
+            <a
+                href="order-history.html"
+                class="account-action">
+
+
+                <div class="account-action-content">
+
+                    <strong>
+                        Your Orders
+                    </strong>
+
+
+                    <span>
+                        View your previous orders.
+                    </span>
+
+                </div>
+
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 WISHLIST
+            ================================================== -->
+
+            <a
+                href="wishlist.html"
+                class="account-action">
+
+
+                <div class="account-action-content">
+
+                    <strong>
+                        Your Wishlist
+                    </strong>
+
+
+                    <span>
+                        View products you've saved.
+                    </span>
+
+                </div>
+
+
+                <i class="fa-regular fa-heart"></i>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 CART
+            ================================================== -->
+
+            <a
+                href="cart.html"
+                class="account-action">
+
+
+                <div class="account-action-content">
+
+                    <strong>
+                        Shopping Cart
+                    </strong>
+
+
+                    <span>
+                        View your current cart.
+                    </span>
+
+                </div>
+
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 LOGOUT
+            ================================================== -->
+
+            <button
+                id="logoutButton"
+                type="button"
+                class="btn primary logout-button">
+
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+
+                Logout
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 CONTINUE SHOPPING
+            ================================================== -->
+
+            <div
+                style="
+                    text-align:center;
+                    margin-top:25px;
+                ">
+
+
+                <a
+                    href="products.html"
+                    style="
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+
+
+                    Continue Shopping
+
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+
+            <a
+                href="index.html"
+                class="logo">
+
+                <span>
+                    Velmira
+                </span>
+
+            </a>
+
+
+            <p>
+
+                Your everyday marketplace for everything
+                you need, want and love.
+
+            </p>
+
+
+            <div class="socials">
+
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+
+                <a href="#">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+
+                <a href="#">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SHOP -->
+
+        <div>
+
+            <h4>
+                Shop
+            </h4>
+
+
+            <a href="products.html">
+                All Products
+            </a>
+
+
+            <a href="products.html?category=Electronics">
+                Electronics
+            </a>
+
+
+            <a href="products.html?category=Fashion">
+                Fashion
+            </a>
+
+
+            <a href="products.html?category=Beauty">
+                Beauty
+            </a>
+
+        </div>
+
+
+
+        <!-- HELP -->
+
+        <div>
+
+            <h4>
+                Help
+            </h4>
+
+
+            <a href="#">
+                Contact Us
+            </a>
+
+
+            <a href="#">
+                Shipping
+            </a>
+
+
+            <a href="#">
+                Returns
+            </a>
+
+
+            <a href="#">
+                FAQs
+            </a>
+
+        </div>
+
+
+
+        <!-- VELMIRA -->
+
+        <div>
+
+            <h4>
+                Velmira
+            </h4>
+
+
+            <a href="#">
+                About Us
+            </a>
+
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+
+            <a href="#">
+                Terms
+            </a>
+
+
+            <a href="#">
+                Careers
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+
+        <p>
+            © 2026 Velmira. All rights reserved.
+        </p>
+
+
+        <p>
+            Secure shopping · Easy returns · Fast delivery
+        </p>
+
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+===================================================== -->
+
+<script src="js/main.js"></script>
+
+
+
+<!-- =====================================================
+     ACCOUNT JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        // =====================================================
+        // GET SESSION
+        // =====================================================
+
+        const token =
+            localStorage.getItem(
+                "velmiraToken"
+            );
+
+
+        let user = null;
+
+
+        try {
+
+            user =
+                JSON.parse(
+                    localStorage.getItem(
+                        "velmiraUser"
+                    )
+                );
+
+        } catch {
+
+            user = null;
+
+        }
+
+
+        // =====================================================
+        // NOT LOGGED IN
+        // =====================================================
+
+        if (
+            !token ||
+            !user ||
+            !user.id
+        ) {
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+
+        }
+
+
+        // =====================================================
+        // USER DETAILS
+        // =====================================================
+
+        const userName =
+            String(
+                user.name || "User"
+            ).trim();
+
+
+        const userEmail =
+            String(
+                user.email || ""
+            ).trim();
+
+
+        const userNameHeading =
+            document.getElementById(
+                "userNameHeading"
+            );
+
+
+        const userNameElement =
+            document.getElementById(
+                "userName"
+            );
+
+
+        const userEmailElement =
+            document.getElementById(
+                "userEmail"
+            );
+
+
+        const accountNavText =
+            document.getElementById(
+                "accountNavText"
+            );
+
+
+        if (userNameHeading) {
+
+            userNameHeading.textContent =
+                userName;
+
+        }
+
+
+        if (userNameElement) {
+
+            userNameElement.textContent =
+                userName;
+
+        }
+
+
+        if (userEmailElement) {
+
+            userEmailElement.textContent =
+                userEmail;
+
+        }
+
+
+        if (accountNavText) {
+
+            accountNavText.textContent =
+                userName;
+
+        }
+
+
+        // =====================================================
+        // USER-SPECIFIC CART
+        // =====================================================
+
+        const cartKey =
+            `velmiraCart_${user.id}`;
+
+
+        function getCart() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(
+                        cartKey
+                    )
+                ) || [];
+
+            } catch {
+
+                return [];
+
+            }
+
+        }
+
+
+        // =====================================================
+        // CART COUNT
+        // =====================================================
+
+        function updateCartCount() {
+
+            const cartCount =
+                document.getElementById(
+                    "cartCount"
+                );
+
+
+            if (!cartCount) {
+                return;
+            }
+
+
+            const cart =
+                getCart();
+
+
+            const total =
+                cart.reduce(
+                    (
+                        total,
+                        item
+                    ) => {
+
+                        return (
+                            total +
+                            (
+                                Number(
+                                    item.quantity
+                                ) || 1
+                            )
+                        );
+
+                    },
+                    0
+                );
+
+
+            cartCount.textContent =
+                total;
+
+        }
+
+
+        updateCartCount();
+
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+
+        if (logoutButton) {
+
+            logoutButton.addEventListener(
+                "click",
+                () => {
+
+
+                    const confirmLogout =
+                        confirm(
+                            "Are you sure you want to logout?"
+                        );
+
+
+                    if (!confirmLogout) {
+                        return;
+                    }
+
+
+                    // REMOVE SESSION ONLY
+
+                    localStorage.removeItem(
+                        "velmiraToken"
+                    );
+
+
+                    localStorage.removeItem(
+                        "velmiraUser"
+                    );
+
+
+                    // IMPORTANT:
+                    // DO NOT DELETE CART
+                    // DO NOT DELETE WISHLIST
+
+
+                    window.location.replace(
+                        "login.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // CART STORAGE UPDATE
+        // =====================================================
+
+        window.addEventListener(
+            "storage",
+            (event) => {
+
+                if (
+                    event.key === cartKey
+                ) {
+
+                    updateCartCount();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Velmira</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        .auth-container {
+
+            max-width: 480px;
+
+            margin: 70px auto;
+
+            padding: 0 20px;
+
+        }
+
+
+        .auth-card {
+
+            background: rgba(255,255,255,0.75);
+
+            border: 1px solid rgba(0,0,0,0.08);
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+        }
+
+
+        .auth-card h1 {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .auth-card > p {
+
+            opacity: 0.7;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid rgba(0,0,0,0.15);
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .password-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .password-wrapper input {
+
+            padding-right: 48px;
+
+        }
+
+
+        .show-password {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+        }
+
+
+        #loginMessage {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            font-size: 14px;
+
+        }
+
+
+        .login-button {
+
+            width: 100%;
+
+            border: none;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .auth-link {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+        }
+
+
+        .auth-link a {
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+        }
+
+
+        @media(max-width:480px) {
+
+            .auth-card {
+
+                padding: 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo">
+
+            Vel<span>mira</span>
+
+        </a>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="wishlist.html"
+                class="nav-icon">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="nav-icon cart">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+<section class="auth-container">
+
+
+    <div class="auth-card">
+
+
+        <p class="eyebrow">
+            WELCOME BACK
+        </p>
+
+
+        <h1>
+            Login to Velmira
+        </h1>
+
+
+        <p>
+            Access your account, orders and saved products.
+        </p>
+
+
+        <div id="loginMessage"></div>
+
+
+        <form id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Email
+                </label>
+
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        aria-label="Show password">
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                id="loginButton"
+                class="btn primary login-button">
+
+                Login
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+        </form>
+
+
+        <div class="auth-link">
+
+            Don't have an account?
+
+            <a href="register.html">
+                Create one
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        // =================================================
+        // IF ALREADY LOGGED IN
+        // =================================================
+
+        const existingToken =
+            localStorage.getItem(
+                "velmiraToken"
+            );
+
+        const existingUser =
+            localStorage.getItem(
+                "velmiraUser"
+            );
+
+
+        if (
+            existingToken &&
+            existingUser
+        ) {
+
+            window.location.replace(
+                "account.html"
+            );
+
+            return;
+
+        }
+
+
+        // =================================================
+        // PASSWORD VISIBILITY
+        // =================================================
+
+        const passwordInput =
+            document.getElementById(
+                "loginPassword"
+            );
+
+
+        const showPasswordButton =
+            document.querySelector(
+                ".show-password"
+            );
+
+
+        if (
+            passwordInput &&
+            showPasswordButton
+        ) {
+
+            showPasswordButton.addEventListener(
+                "click",
+                () => {
+
+                    const icon =
+                        showPasswordButton.querySelector(
+                            "i"
+                        );
+
+
+                    if (
+                        passwordInput.type ===
+                        "password"
+                    ) {
+
+                        passwordInput.type =
+                            "text";
+
+                        icon.className =
+                            "fa-regular fa-eye-slash";
+
+                    } else {
+
+                        passwordInput.type =
+                            "password";
+
+                        icon.className =
+                            "fa-regular fa-eye";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // =================================================
+        // LOGIN
+        // =================================================
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const loginMessage =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById(
+                            "loginEmail"
+                        )
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById(
+                            "loginPassword"
+                        )
+                        .value;
+
+
+                loginMessage.style.display =
+                    "none";
+
+
+                loginButton.disabled =
+                    true;
+
+
+                loginButton.innerHTML = `
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Logging in...
+                `;
+
+
+                try {
+
+
+                    // =================================================
+                    // SEND LOGIN REQUEST TO BACKEND
+                    // =================================================
+
+                    const response =
+                        await fetch(
+                            "http://127.0.0.1:5000/api/auth/login",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        email,
+                                        password
+                                    })
+
+                            }
+                        );
+
+
+                    let data;
+
+
+                    try {
+
+                        data =
+                            await response.json();
+
+                    } catch {
+
+                        throw new Error(
+                            "Invalid response from server"
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // LOGIN FAILED
+                    // =================================================
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Login failed"
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // VERIFY RESPONSE
+                    // =================================================
+
+                    if (
+                        !data.token ||
+                        !data.user ||
+                        !data.user.id
+                    ) {
+
+                        throw new Error(
+                            "Invalid login data received"
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // SAVE LOGIN SESSION
+                    // =================================================
+
+                    localStorage.setItem(
+                        "velmiraToken",
+                        data.token
+                    );
+
+
+                    localStorage.setItem(
+                        "velmiraUser",
+                        JSON.stringify(
+                            data.user
+                        )
+                    );
+
+
+                    // =================================================
+                    // CREATE USER-SPECIFIC CART
+                    // =================================================
+
+                    const cartKey =
+                        `velmiraCart_${data.user.id}`;
+
+
+                    const wishlistKey =
+                        `velmiraWishlist_${data.user.id}`;
+
+
+                    if (
+                        !localStorage.getItem(
+                            cartKey
+                        )
+                    ) {
+
+                        localStorage.setItem(
+                            cartKey,
+                            JSON.stringify([])
+                        );
+
+                    }
+
+
+                    if (
+                        !localStorage.getItem(
+                            wishlistKey
+                        )
+                    ) {
+
+                        localStorage.setItem(
+                            wishlistKey,
+                            JSON.stringify([])
+                        );
+
+                    }
+
+
+                    // =================================================
+                    // SUCCESS
+                    // =================================================
+
+                    loginMessage.textContent =
+                        `Welcome back, ${data.user.name}!`;
+
+
+                    loginMessage.style.display =
+                        "block";
+
+
+                    loginMessage.style.color =
+                        "green";
+
+
+                    // =================================================
+                    // REDIRECT
+                    // =================================================
+
+                    setTimeout(
+                        () => {
+
+                            window.location.replace(
+                                "account.html"
+                            );
+
+                        },
+                        500
+                    );
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "LOGIN ERROR:",
+                        error
+                    );
+
+
+                    loginMessage.textContent =
+                        error.message ||
+                        "Unable to login";
+
+
+                    loginMessage.style.display =
+                        "block";
+
+
+                    loginMessage.style.color =
+                        "#c0392b";
+
+
+                    loginButton.disabled =
+                        false;
+
+
+                    loginButton.innerHTML = `
+                        Login
+                        <i class="fa-solid fa-arrow-right"></i>
+                    `;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

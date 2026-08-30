@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Velmira</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================
+           CHECKOUT
+        ========================================= */
+
+        .checkout-section {
+            padding: 50px 20px;
+        }
+
+        .checkout-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 35px;
+        }
+
+
+        /* =========================================
+           CHECKOUT BOX
+        ========================================= */
+
+        .checkout-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .checkout-box h2 {
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #333;
+        }
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        /* =========================================
+           ORDER SUMMARY
+        ========================================= */
+
+        .order-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+        .order-item img {
+
+            width: 65px;
+
+            height: 65px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            background: #f5f5f5;
+
+        }
+
+        .order-item-info {
+
+            flex: 1;
+
+        }
+
+        .order-item-info h4 {
+
+            margin: 0 0 5px;
+
+            font-size: 14px;
+
+        }
+
+        .order-item-info p {
+
+            margin: 0;
+
+            font-size: 13px;
+
+            opacity: .7;
+
+        }
+
+        .order-item-price {
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =========================================
+           TOTAL
+        ========================================= */
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin: 15px 0;
+
+        }
+
+        .summary-row.total {
+
+            border-top: 1px solid #ddd;
+
+            padding-top: 18px;
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================
+           PLACE ORDER
+        ========================================= */
+
+        .place-order-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            margin-top: 15px;
+
+        }
+
+
+        /* =========================================
+           EMPTY
+        ========================================= */
+
+        .checkout-empty {
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+        }
+
+        .checkout-empty i {
+
+            font-size: 50px;
+
+            opacity: .5;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================================
+           SUCCESS
+        ========================================= */
+
+        .order-success {
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+        }
+
+        .order-success i {
+
+            font-size: 55px;
+
+            margin-bottom: 20px;
+
+        }
+
+        .order-success h2 {
+
+            margin-bottom: 10px;
+
+        }
+
+        .order-success p {
+
+            opacity: .7;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 750px) {
+
+            .checkout-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .checkout-box {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            Vel<span>mira</span>
+        </a>
+
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search products, brands and more">
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="wishlist.html"
+                class="nav-icon">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="nav-icon cart">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <span>0</span>
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="account">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>Account</span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main>
+
+<section class="checkout-section">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                SECURE CHECKOUT
+            </p>
+
+            <h2>
+                Checkout
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="checkout-content"
+        class="checkout-container">
+
+        <!-- JavaScript loads content -->
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Velmira. All rights reserved.
+        </p>
+
+        <p>
+            Made for everyday shopping.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="js/main.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* =========================================
+       ELEMENT
+    ========================================= */
+
+    const content =
+        document.getElementById(
+            "checkout-content"
+        );
+
+
+    /* =========================================
+       GET USER
+    ========================================= */
+
+    function getCurrentUser() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "velmiraUser"
+                )
+            );
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    }
+
+
+    const user =
+        getCurrentUser();
+
+
+    /* =========================================
+       GET USER ID
+    ========================================= */
+
+    function getUserId() {
+
+        if (!user) {
+
+            return null;
+
+        }
+
+
+        return String(
+
+            user.id ||
+            user._id ||
+            user.userId ||
+            ""
+
+        ).trim();
+
+    }
+
+
+    const userId =
+        getUserId();
+
+
+    /* =========================================
+       LOGIN CHECK
+    ========================================= */
+
+    if (!userId) {
+
+        content.innerHTML = `
+
+            <div class="checkout-box checkout-empty">
+
+                <i class="fa-regular fa-user"></i>
+
+                <h2>
+                    Please login first
+                </h2>
+
+                <p>
+                    Login to continue with your order.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="btn primary">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =========================================
+       CUSTOMER CART KEY
+    ========================================= */
+
+    const CART_KEY =
+        "velmiraCart_" + userId;
+
+
+    /* =========================================
+       GET CART
+    ========================================= */
+
+    function getCart() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    CART_KEY
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =========================================
+       SAVE CART
+    ========================================= */
+
+    function saveCart(cart) {
+
+        localStorage.setItem(
+
+            CART_KEY,
+
+            JSON.stringify(cart)
+
+        );
+
+    }
+
+
+    /* =========================================
+       PRODUCT ID
+    ========================================= */
+
+    function getProductId(product) {
+
+        return String(
+
+            product.id ||
+            product._id ||
+            ""
+
+        );
+
+    }
+
+
+    /* =========================================
+       PRICE
+    ========================================= */
+
+    function getPrice(value) {
+
+        if (typeof value === "number") {
+
+            return value;
+
+        }
+
+
+        return Number(
+
+            String(value || "")
+
+                .replace(/[₹,\s]/g, "")
+
+        ) || 0;
+
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        return String(value || "")
+
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================================
+       LOAD CHECKOUT
+    ========================================= */
+
+    function loadCheckout() {
+
+
+        const cart =
+            getCart();
+
+
+        /* =====================================
+           EMPTY CART
+        ===================================== */
+
+        if (cart.length === 0) {
+
+            content.innerHTML = `
+
+                <div class="checkout-box checkout-empty">
+
+                    <i
+                        class="fa-solid fa-bag-shopping">
+                    </i>
+
+                    <h2>
+                        Your cart is empty
+                    </h2>
+
+                    <p>
+                        Add some products before checking out.
+                    </p>
+
+                    <a
+                        href="products.html"
+                        class="btn primary">
+
+                        Explore Products
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =====================================
+           CALCULATE TOTAL
+        ===================================== */
+
+        const subtotal =
+            cart.reduce(
+
+                (total, item) => {
+
+                    const price =
+                        getPrice(item.price);
+
+
+                    const quantity =
+                        Number(
+                            item.quantity
+                        ) || 1;
+
+
+                    return total +
+                        price * quantity;
+
+                },
+
+                0
+
+            );
+
+
+        const shipping =
+            subtotal >= 999
+                ? 0
+                : 99;
+
+
+        const total =
+            subtotal + shipping;
+
+
+        /* =====================================
+           DISPLAY
+        ===================================== */
+
+        content.innerHTML = `
+
+            <!-- =================================
+                 CUSTOMER DETAILS
+            ================================== -->
+
+            <div class="checkout-box">
+
+                <h2>
+                    Delivery Details
+                </h2>
+
+
+                <form id="checkout-form">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            value="${escapeHTML(
+                                user.name || ""
+                            )}"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            value="${escapeHTML(
+                                user.email || ""
+                            )}"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            rows="4"
+                            placeholder="House number, street, area"
+                            required></textarea>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                placeholder="City"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                State
+                            </label>
+
+                            <input
+                                type="text"
+                                id="state"
+                                placeholder="State"
+                                required>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Pincode
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                placeholder="6-digit pincode"
+                                maxlength="6"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Payment Method
+                            </label>
+
+                            <select id="paymentMethod">
+
+                                <option value="COD">
+                                    Cash on Delivery
+                                </option>
+
+                                <option value="UPI">
+                                    UPI
+                                </option>
+
+                                <option value="CARD">
+                                    Credit / Debit Card
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn primary place-order-btn">
+
+                        <i
+                            class="fa-solid fa-lock">
+                        </i>
+
+                        Place Order · ₹${total.toLocaleString("en-IN")}
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================
+                 ORDER SUMMARY
+            ================================== -->
+
+            <div class="checkout-box">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                <div id="order-items">
+
+                    ${cart.map(item => {
+
+                        const name =
+                            item.name ||
+                            "Product";
+
+
+                        const image =
+                            item.image ||
+                            "https://via.placeholder.com/100x100?text=Velmira";
+
+
+                        const price =
+                            getPrice(
+                                item.price
+                            );
+
+
+                        const quantity =
+                            Number(
+                                item.quantity
+                            ) || 1;
+
+
+                        return `
+
+                            <div class="order-item">
+
+                                <img
+                                    src="${escapeHTML(image)}"
+                                    alt="${escapeHTML(name)}"
+                                    onerror="
+                                        this.src='https://via.placeholder.com/100x100?text=Velmira';
+                                    ">
+
+
+                                <div class="order-item-info">
+
+                                    <h4>
+                                        ${escapeHTML(name)}
+                                    </h4>
+
+                                    <p>
+                                        Quantity: ${quantity}
+                                    </p>
+
+                                </div>
+
+
+                                <div class="order-item-price">
+
+                                    ₹${(
+                                        price * quantity
+                                    ).toLocaleString("en-IN")}
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }).join("")}
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ₹${subtotal.toLocaleString("en-IN")}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Shipping
+                    </span>
+
+                    <strong>
+
+                        ${
+                            shipping === 0
+                                ? "FREE"
+                                : "₹" +
+                                  shipping.toLocaleString(
+                                      "en-IN"
+                                  )
+                        }
+
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₹${total.toLocaleString("en-IN")}
+                    </strong>
+
+                </div>
+
+
+                <p style="
+                    font-size:13px;
+                    opacity:.65;
+                    margin-top:20px;
+                ">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Your order information is securely processed.
+
+                </p>
+
+            </div>
+
+        `;
+
+
+        /* =====================================
+           FORM SUBMIT
+        ===================================== */
+
+        const form =
+            document.getElementById(
+                "checkout-form"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                const fullName =
+                    document.getElementById(
+                        "fullName"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value.trim();
+
+
+                const phone =
+                    document.getElementById(
+                        "phone"
+                    ).value.trim();
+
+
+                const address =
+                    document.getElementById(
+                        "address"
+                    ).value.trim();
+
+
+                const city =
+                    document.getElementById(
+                        "city"
+                    ).value.trim();
+
+
+                const state =
+                    document.getElementById(
+                        "state"
+                    ).value.trim();
+
+
+                const pincode =
+                    document.getElementById(
+                        "pincode"
+                    ).value.trim();
+
+
+                const paymentMethod =
+                    document.getElementById(
+                        "paymentMethod"
+                    ).value;
+
+
+                /* ==============================
+                   BASIC VALIDATION
+                ============================== */
+
+                if (
+                    !fullName ||
+                    !email ||
+                    !phone ||
+                    !address ||
+                    !city ||
+                    !state ||
+                    !pincode
+                ) {
+
+                    alert(
+                        "Please fill all delivery details."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!/^\d{6}$/.test(pincode)) {
+
+                    alert(
+                        "Please enter a valid 6-digit pincode."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !/^\d{10}$/.test(
+                        phone.replace(/\D/g, "")
+                    )
+                ) {
+
+                    alert(
+                        "Please enter a valid 10-digit phone number."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ==============================
+                   CREATE ORDER
+                ============================== */
+
+                const order = {
+
+                    orderId:
+                        "VEL" +
+                        Date.now(),
+
+                    userId:
+                        userId,
+
+                    customer: {
+
+                        name:
+                            fullName,
+
+                        email:
+                            email,
+
+                        phone:
+                            phone
+
+                    },
+
+                    shippingAddress: {
+
+                        address:
+                            address,
+
+                        city:
+                            city,
+
+                        state:
+                            state,
+
+                        pincode:
+                            pincode
+
+                    },
+
+                    items:
+                        cart,
+
+                    subtotal:
+                        subtotal,
+
+                    shipping:
+                        shipping,
+
+                    total:
+                        total,
+
+                    paymentMethod:
+                        paymentMethod,
+
+                    status:
+                        "Placed",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                /* ==============================
+                   SAVE ORDER LOCALLY
+                ============================== */
+
+                const ORDER_KEY =
+                    "velmiraOrders_" +
+                    userId;
+
+
+                let orders = [];
+
+
+                try {
+
+                    orders =
+                        JSON.parse(
+                            localStorage.getItem(
+                                ORDER_KEY
+                            )
+                        ) || [];
+
+                } catch (error) {
+
+                    orders = [];
+
+                }
+
+
+                orders.push(order);
+
+
+                localStorage.setItem(
+
+                    ORDER_KEY,
+
+                    JSON.stringify(
+                        orders
+                    )
+
+                );
+
+
+                /* ==============================
+                   CLEAR CART
+                ============================== */
+
+                saveCart([]);
+
+
+                /* ==============================
+                   UPDATE CART COUNT
+                ============================== */
+
+                document
+                    .querySelectorAll(
+                        ".cart span"
+                    )
+                    .forEach(span => {
+
+                        span.textContent = "0";
+
+                    });
+
+
+                /* ==============================
+                   SUCCESS MESSAGE
+                ============================== */
+
+                content.innerHTML = `
+
+                    <div
+                        class="checkout-box order-success"
+                        style="grid-column:1/-1;">
+
+                        <i
+                            class="fa-solid fa-circle-check">
+                        </i>
+
+
+                        <h2>
+                            Order Placed Successfully!
+                        </h2>
+
+
+                        <p>
+                            Thank you for shopping with Velmira.
+                        </p>
+
+
+                        <p>
+                            Order ID:
+                            <strong>
+                                ${escapeHTML(
+                                    order.orderId
+                                )}
+                            </strong>
+                        </p>
+
+
+                        <div style="
+                            display:flex;
+                            gap:12px;
+                            justify-content:center;
+                            flex-wrap:wrap;
+                            margin-top:20px;
+                        ">
+
+                            <a
+                                href="products.html"
+                                class="btn primary">
+
+                                Continue Shopping
+
+                            </a>
+
+
+                            <a
+                                href="index.html"
+                                class="btn">
+
+                                Go Home
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       START
+    ========================================= */
+
+    loadCheckout();
+
+});
+
+</script>
+
+</body>
+
+</html>

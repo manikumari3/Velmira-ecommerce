@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wishlist | Velmira</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+    /* =========================================
+       WISHLIST PRODUCT LINKS
+    ========================================= */
+
+    .wishlist-product-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .wishlist-product-link img {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .wishlist-product-link:hover img {
+        transform: scale(1.03);
+    }
+
+    .wishlist-product-name {
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.2s ease;
+    }
+
+    .wishlist-product-name:hover {
+        opacity: 0.65;
+    }
+
+
+    /* =========================================
+       WISHLIST HEART
+    ========================================= */
+
+    .wishlist-remove {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 5;
+
+        width: 40px;
+        height: 40px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(255,255,255,0.95);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        font-size: 17px;
+
+        transition: all 0.2s ease;
+    }
+
+    .wishlist-remove:hover {
+        transform: scale(1.08);
+    }
+
+
+    /* =========================================
+       ADD TO CART
+    ========================================= */
+
+    .wishlist-cart-button {
+
+        width: 44px;
+        height: 44px;
+
+        border: none;
+        border-radius: 10px;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: all 0.2s ease;
+
+    }
+
+    .wishlist-cart-button:hover {
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================================
+       EMPTY WISHLIST
+    ========================================= */
+
+    .wishlist-empty {
+
+        grid-column: 1 / -1;
+
+        text-align: center;
+
+        padding: 70px 20px;
+
+    }
+
+    .wishlist-empty i {
+
+        font-size: 52px;
+
+        margin-bottom: 20px;
+
+        opacity: 0.65;
+
+    }
+
+    .wishlist-empty h2 {
+        margin-bottom: 10px;
+    }
+
+    .wishlist-empty p {
+        margin-bottom: 25px;
+        opacity: 0.7;
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+        .wishlist-empty {
+            padding: 50px 15px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Vel<span>mira</span>
+    </a>
+
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            placeholder="Search products, brands and more"
+            autocomplete="off">
+
+    </div>
+
+
+    <div class="nav-actions">
+
+
+        <a
+            href="wishlist.html"
+            class="nav-icon">
+
+            <i class="fa-solid fa-heart"></i>
+
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-icon cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>0</span>
+
+        </a>
+
+
+        <a
+            href="login.html"
+            class="account">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Account</span>
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+</header>
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main>
+
+<section class="section">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                SAVED FOR LATER
+            </p>
+
+            <h2>
+                My Wishlist
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        id="wishlist-container"
+        class="product-grid">
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+<div class="footer-bottom">
+
+    <p>
+        © 2026 Velmira. All rights reserved.
+    </p>
+
+    <p>
+        Made for everyday shopping.
+    </p>
+
+</div>
+
+
+</footer>
+
+<script src="js/main.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container =
+        document.getElementById("wishlist-container");
+
+
+    /* =====================================================
+       GET LOGGED-IN USER
+    ===================================================== */
+
+    function getCurrentUser() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem("velmiraUser")
+            );
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    }
+
+
+    const user = getCurrentUser();
+
+
+    /* =====================================================
+       GET USER ID
+       Supports both id and MongoDB _id
+    ===================================================== */
+
+    function getUserId() {
+
+        if (!user) {
+            return null;
+        }
+
+        return String(
+            user.id ||
+            user._id ||
+            user.userId ||
+            ""
+        ).trim();
+
+    }
+
+
+    const userId = getUserId();
+
+
+    /* =====================================================
+       PROTECT WISHLIST
+       Wishlist belongs to logged-in customer
+    ===================================================== */
+
+    if (!userId) {
+
+        container.innerHTML = `
+
+            <div class="wishlist-empty">
+
+                <i class="fa-regular fa-user"></i>
+
+                <h2>
+                    Please login first
+                </h2>
+
+                <p>
+                    Login to view and save your wishlist.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="btn primary">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CUSTOMER-SPECIFIC STORAGE KEYS
+    ===================================================== */
+
+    const WISHLIST_KEY =
+        "velmiraWishlist_" + userId;
+
+    const CART_KEY =
+        "velmiraCart_" + userId;
+
+
+    console.log(
+        "Logged-in customer:",
+        user
+    );
+
+    console.log(
+        "Wishlist key:",
+        WISHLIST_KEY
+    );
+
+    console.log(
+        "Cart key:",
+        CART_KEY
+    );
+
+
+    /* =====================================================
+       GET PRODUCT ID
+    ===================================================== */
+
+    function getProductId(product) {
+
+        return String(
+            product.id ||
+            product._id ||
+            ""
+        );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       PRICE HELPER
+    ===================================================== */
+
+    function getPrice(price) {
+
+        if (typeof price === "number") {
+
+            return price;
+
+        }
+
+        return Number(
+            String(price || "")
+                .replace(/[₹,\s]/g, "")
+        ) || 0;
+
+    }
+
+
+    /* =====================================================
+       GET WISHLIST
+    ===================================================== */
+
+    function getWishlist() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    WISHLIST_KEY
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE WISHLIST
+    ===================================================== */
+
+    function saveWishlist(wishlist) {
+
+        localStorage.setItem(
+            WISHLIST_KEY,
+            JSON.stringify(wishlist)
+        );
+
+    }
+
+
+    /* =====================================================
+       GET CART
+    ===================================================== */
+
+    function getCart() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    CART_KEY
+                )
+            ) || [];
+
+        } catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE CART
+    ===================================================== */
+
+    function saveCart(cart) {
+
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    /* =====================================================
+       UPDATE CART COUNT
+    ===================================================== */
+
+    function updateCartCount() {
+
+        const cart =
+            getCart();
+
+
+        const totalQuantity =
+            cart.reduce(
+                (total, item) => {
+
+                    return total +
+                        (
+                            Number(
+                                item.quantity
+                            ) || 1
+                        );
+
+                },
+                0
+            );
+
+
+        document
+            .querySelectorAll(".cart span")
+            .forEach(span => {
+
+                span.textContent =
+                    totalQuantity;
+
+            });
+
+    }
+
+
+    /* =====================================================
+       LOAD WISHLIST
+    ===================================================== */
+
+    function loadWishlist() {
+
+        const wishlist =
+            getWishlist();
+
+
+        /* =================================================
+           EMPTY WISHLIST
+        ================================================= */
+
+        if (wishlist.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="wishlist-empty">
+
+                    <i
+                        class="fa-regular fa-heart">
+                    </i>
+
+                    <h2>
+                        Your wishlist is empty
+                    </h2>
+
+                    <p>
+                        Save products you love
+                        and find them here.
+                    </p>
+
+                    <a
+                        href="products.html"
+                        class="btn primary">
+
+                        Explore Products
+
+                    </a>
+
+                </div>
+
+            `;
+
+            updateCartCount();
+
+            return;
+
+        }
+
+
+        /* =================================================
+           DISPLAY PRODUCTS
+        ================================================= */
+
+        container.innerHTML =
+
+            wishlist.map(
+                (product, index) => {
+
+                    const productId =
+                        getProductId(product);
+
+
+                    const name =
+                        product.name ||
+                        "Product";
+
+
+                    const category =
+                        product.category ||
+                        "General";
+
+
+                    const image =
+                        product.image ||
+                        "https://via.placeholder.com/400x400?text=Velmira";
+
+
+                    const price =
+                        getPrice(
+                            product.price
+                        );
+
+
+                    const oldPrice =
+                        getPrice(
+                            product.oldPrice
+                        );
+
+
+                    const rating =
+                        product.rating ||
+                        0;
+
+
+                    return `
+
+                        <article
+                            class="product-card">
+
+
+                            <!-- PRODUCT IMAGE -->
+
+                            <div
+                                class="product-image">
+
+
+                                <a
+                                    href="product.html?id=${encodeURIComponent(productId)}"
+                                    class="wishlist-product-link">
+
+
+                                    <img
+                                        src="${escapeHTML(image)}"
+                                        alt="${escapeHTML(name)}"
+                                        loading="lazy"
+                                        onerror="
+                                            this.src='https://via.placeholder.com/400x400?text=Velmira';
+                                        ">
+
+
+                                </a>
+
+
+                                <!-- REMOVE -->
+
+                                <button
+                                    class="wishlist-remove"
+                                    type="button"
+                                    data-index="${index}"
+                                    aria-label="Remove from wishlist">
+
+                                    <i
+                                        class="fa-solid fa-heart">
+                                    </i>
+
+                                </button>
+
+
+                            </div>
+
+
+                            <!-- PRODUCT INFORMATION -->
+
+                            <div
+                                class="product-info">
+
+
+                                <span
+                                    class="product-category">
+
+                                    ${escapeHTML(category)}
+
+                                </span>
+
+
+                                <h3>
+
+                                    <a
+                                        href="product.html?id=${encodeURIComponent(productId)}"
+                                        class="wishlist-product-name">
+
+                                        ${escapeHTML(name)}
+
+                                    </a>
+
+                                </h3>
+
+
+                                <!-- RATING -->
+
+                                <div class="rating">
+
+                                    ★★★★★
+
+                                    <span>
+                                        ${rating}
+                                    </span>
+
+                                </div>
+
+
+                                <!-- PRICE -->
+
+                                <div
+                                    class="product-footer">
+
+
+                                    <div>
+
+                                        <strong>
+
+                                            ₹${price.toLocaleString("en-IN")}
+
+                                        </strong>
+
+
+                                        ${
+                                            oldPrice > price
+                                            ?
+                                            `
+
+                                            <del>
+
+                                                ₹${oldPrice.toLocaleString("en-IN")}
+
+                                            </del>
+
+                                            `
+                                            :
+                                            ""
+                                        }
+
+                                    </div>
+
+
+                                    <!-- ADD TO CART -->
+
+                                    <button
+                                        class="wishlist-cart-button"
+                                        type="button"
+                                        data-index="${index}"
+                                        aria-label="Add to cart">
+
+                                        <i
+                                            class="fa-solid fa-plus">
+                                        </i>
+
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+                    `;
+
+                }
+
+            ).join("");
+
+
+        updateCartCount();
+
+    }
+
+
+    /* =====================================================
+       REMOVE / ADD TO CART
+    ===================================================== */
+
+    container.addEventListener(
+        "click",
+        event => {
+
+
+            /* =================================================
+               REMOVE FROM WISHLIST
+            ================================================= */
+
+            const removeButton =
+                event.target.closest(
+                    ".wishlist-remove"
+                );
+
+
+            if (removeButton) {
+
+                const index =
+                    Number(
+                        removeButton.dataset.index
+                    );
+
+
+                const wishlist =
+                    getWishlist();
+
+
+                if (wishlist[index]) {
+
+                    wishlist.splice(
+                        index,
+                        1
+                    );
+
+
+                    saveWishlist(
+                        wishlist
+                    );
+
+
+                    loadWishlist();
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =================================================
+               ADD WISHLIST PRODUCT TO CART
+            ================================================= */
+
+            const cartButton =
+                event.target.closest(
+                    ".wishlist-cart-button"
+                );
+
+
+            if (cartButton) {
+
+                const index =
+                    Number(
+                        cartButton.dataset.index
+                    );
+
+
+                const wishlist =
+                    getWishlist();
+
+
+                const product =
+                    wishlist[index];
+
+
+                if (!product) {
+
+                    return;
+
+                }
+
+
+                const cart =
+                    getCart();
+
+
+                const productId =
+                    getProductId(
+                        product
+                    );
+
+
+                /* =============================================
+                   FIND EXISTING PRODUCT
+                ============================================= */
+
+                const existing =
+                    cart.find(
+                        item =>
+                            getProductId(item) ===
+                            productId
+                    );
+
+
+                if (existing) {
+
+                    existing.quantity =
+                        (
+                            Number(
+                                existing.quantity
+                            ) || 1
+                        ) + 1;
+
+                }
+
+                else {
+
+                    cart.push({
+
+                        id:
+                            productId,
+
+                        name:
+                            product.name,
+
+                        category:
+                            product.category,
+
+                        price:
+                            getPrice(
+                                product.price
+                            ),
+
+                        oldPrice:
+                            getPrice(
+                                product.oldPrice
+                            ),
+
+                        image:
+                            product.image,
+
+                        rating:
+                            product.rating || 0,
+
+                        badge:
+                            product.badge || "",
+
+                        description:
+                            product.description || "",
+
+                        quantity:
+                            1
+
+                    });
+
+                }
+
+
+                /* =============================================
+                   SAVE TO THIS CUSTOMER'S CART
+                ============================================= */
+
+                saveCart(
+                    cart
+                );
+
+
+                /* =============================================
+                   BUTTON FEEDBACK
+                ============================================= */
+
+                const originalHTML =
+                    cartButton.innerHTML;
+
+
+                cartButton.innerHTML = `
+
+                    <i
+                        class="fa-solid fa-check">
+                    </i>
+
+                `;
+
+
+                updateCartCount();
+
+
+                setTimeout(
+                    () => {
+
+                        cartButton.innerHTML =
+                            originalHTML;
+
+                    },
+                    1000
+                );
+
+
+                return;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    loadWishlist();
+
+    updateCartCount();
+
+
+});
+
+</script>
+
+</body>
+
+</html>

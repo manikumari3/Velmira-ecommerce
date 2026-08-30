@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cart | Velmira</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* =========================================
+   CART
+========================================= */
+
+.cart-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+}
+
+
+/* =========================================
+   CART ITEMS
+========================================= */
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.cart-item {
+
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+
+    gap: 20px;
+
+    padding: 18px;
+
+    border: 1px solid rgba(0,0,0,0.08);
+
+    border-radius: 14px;
+
+    background: #fff;
+
+    align-items: center;
+
+}
+
+.cart-item-image {
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background: #f5f5f5;
+
+}
+
+.cart-item-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+.cart-item-info h3 {
+
+    margin: 5px 0 8px;
+
+}
+
+.cart-item-category {
+
+    font-size: 12px;
+
+    opacity: 0.6;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+.cart-item-price {
+
+    font-weight: 700;
+
+    font-size: 18px;
+
+}
+
+.cart-item-old-price {
+
+    margin-left: 8px;
+
+    opacity: 0.5;
+
+}
+
+
+/* =========================================
+   QUANTITY
+========================================= */
+
+.quantity-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 12px;
+
+}
+
+.quantity-btn {
+
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid rgba(0,0,0,0.15);
+
+    background: #fff;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+.quantity-btn:hover {
+
+    transform: scale(1.05);
+
+}
+
+.quantity-number {
+
+    min-width: 25px;
+
+    text-align: center;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   REMOVE
+========================================= */
+
+.remove-cart-item {
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    opacity: 0.55;
+
+    padding: 8px;
+
+}
+
+.remove-cart-item:hover {
+
+    opacity: 1;
+
+}
+
+
+/* =========================================
+   SUMMARY
+========================================= */
+
+.cart-summary {
+
+    border: 1px solid rgba(0,0,0,0.08);
+
+    border-radius: 14px;
+
+    padding: 24px;
+
+    background: #fff;
+
+    position: sticky;
+
+    top: 20px;
+
+}
+
+.cart-summary h3 {
+
+    margin-bottom: 20px;
+
+}
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+
+}
+
+.summary-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    border-top: 1px solid rgba(0,0,0,0.1);
+
+    padding-top: 18px;
+
+    margin-top: 18px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+.checkout-btn {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+}
+
+.continue-shopping {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+}
+
+
+/* =========================================
+   EMPTY CART
+========================================= */
+
+.cart-empty {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+.cart-empty i {
+
+    font-size: 55px;
+
+    opacity: 0.55;
+
+    margin-bottom: 20px;
+
+}
+
+.cart-empty h2 {
+
+    margin-bottom: 10px;
+
+}
+
+.cart-empty p {
+
+    opacity: 0.7;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.cart-login {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .cart-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .cart-summary {
+
+        position: static;
+
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .cart-item {
+
+        grid-template-columns: 85px 1fr;
+
+        gap: 14px;
+
+    }
+
+    .cart-item-image {
+
+        width: 85px;
+        height: 85px;
+
+    }
+
+    .cart-item-actions {
+
+        grid-column: 1 / -1;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Vel<span>mira</span>
+    </a>
+
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            placeholder="Search products, brands and more"
+            autocomplete="off">
+
+    </div>
+
+
+    <div class="nav-actions">
+
+        <a
+            href="wishlist.html"
+            class="nav-icon">
+
+            <i class="fa-solid fa-heart"></i>
+
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-icon cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>0</span>
+
+        </a>
+
+
+        <a
+            href="login.html"
+            class="account">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Account</span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+</header>
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main>
+
+<section class="section">
+
+<div class="cart-container">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                YOUR SHOPPING BAG
+            </p>
+
+            <h2>
+                My Cart
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="cart-content">
+
+    </div>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+<div class="footer-bottom">
+
+    <p>
+        © 2026 Velmira. All rights reserved.
+    </p>
+
+    <p>
+        Made for everyday shopping.
+    </p>
+
+</div>
+
+</footer>
+
+
+<!-- =========================================
+     MAIN JS
+========================================= -->
+
+<script src="js/main.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    const container =
+        document.getElementById("cart-content");
+
+
+    /* =====================================================
+       GET LOGGED-IN USER
+    ===================================================== */
+
+    function getCurrentUser() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem("velmiraUser")
+            );
+
+        }
+
+        catch (error) {
+
+            return null;
+
+        }
+
+    }
+
+
+    const user =
+        getCurrentUser();
+
+
+    /* =====================================================
+       GET USER ID
+    ===================================================== */
+
+    function getUserId() {
+
+        if (!user) {
+
+            return null;
+
+        }
+
+
+        return String(
+
+            user.id ||
+            user._id ||
+            user.userId ||
+            ""
+
+        ).trim();
+
+    }
+
+
+    const userId =
+        getUserId();
+
+
+    /* =====================================================
+       LOGIN PROTECTION
+    ===================================================== */
+
+    if (!userId) {
+
+        container.innerHTML = `
+
+            <div class="cart-login">
+
+                <i
+                    class="fa-regular fa-user"
+                    style="font-size:50px;opacity:.6;">
+                </i>
+
+                <h2 style="margin-top:20px;">
+                    Please login first
+                </h2>
+
+                <p style="opacity:.7;margin:10px 0 25px;">
+                    Login to view your shopping cart.
+                </p>
+
+                <a
+                    href="login.html"
+                    class="btn primary">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CUSTOMER-SPECIFIC CART KEY
+    ===================================================== */
+
+    const CART_KEY =
+        "velmiraCart_" + userId;
+
+
+    console.log(
+        "Logged-in customer:",
+        user
+    );
+
+    console.log(
+        "Cart key:",
+        CART_KEY
+    );
+
+
+    /* =====================================================
+       GET CART
+    ===================================================== */
+
+    function getCart() {
+
+        try {
+
+            return JSON.parse(
+
+                localStorage.getItem(
+                    CART_KEY
+                )
+
+            ) || [];
+
+        }
+
+        catch (error) {
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE CART
+    ===================================================== */
+
+    function saveCart(cart) {
+
+        localStorage.setItem(
+
+            CART_KEY,
+
+            JSON.stringify(cart)
+
+        );
+
+    }
+
+
+    /* =====================================================
+       PRODUCT ID
+    ===================================================== */
+
+    function getProductId(product) {
+
+        return String(
+
+            product.id ||
+            product._id ||
+            ""
+
+        );
+
+    }
+
+
+    /* =====================================================
+       PRICE
+    ===================================================== */
+
+    function getPrice(price) {
+
+        if (
+            typeof price === "number"
+        ) {
+
+            return price;
+
+        }
+
+
+        return Number(
+
+            String(price || "")
+
+                .replace(/[₹,\s]/g, "")
+
+        ) || 0;
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        return String(value || "")
+
+            .replace(/&/g, "&amp;")
+
+            .replace(/</g, "&lt;")
+
+            .replace(/>/g, "&gt;")
+
+            .replace(/"/g, "&quot;")
+
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       UPDATE HEADER CART COUNT
+    ===================================================== */
+
+    function updateCartCount() {
+
+        const cart =
+            getCart();
+
+
+        const totalQuantity =
+            cart.reduce(
+
+                (total, item) => {
+
+                    return total +
+
+                        (
+                            Number(
+                                item.quantity
+                            ) || 1
+                        );
+
+                },
+
+                0
+
+            );
+
+
+        document
+            .querySelectorAll(".cart span")
+            .forEach(span => {
+
+                span.textContent =
+                    totalQuantity;
+
+            });
+
+    }
+
+
+    /* =====================================================
+       RENDER CART
+    ===================================================== */
+
+    function renderCart() {
+
+        const cart =
+            getCart();
+
+
+        updateCartCount();
+
+
+        /* ================================================
+           EMPTY CART
+        ================================================ */
+
+        if (cart.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="cart-empty">
+
+                    <i
+                        class="fa-solid fa-bag-shopping">
+                    </i>
+
+                    <h2>
+                        Your cart is empty
+                    </h2>
+
+                    <p>
+                        Looks like you haven't added
+                        anything to your cart yet.
+                    </p>
+
+                    <a
+                        href="products.html"
+                        class="btn primary">
+
+                        Continue Shopping
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* ================================================
+           CALCULATE TOTALS
+        ================================================ */
+
+        let subtotal = 0;
+
+
+        cart.forEach(item => {
+
+            const price =
+                getPrice(item.price);
+
+
+            const quantity =
+                Number(item.quantity) || 1;
+
+
+            subtotal +=
+                price * quantity;
+
+        });
+
+
+        const shipping =
+            subtotal >= 999
+                ? 0
+                : 99;
+
+
+        const total =
+            subtotal + shipping;
+
+
+        /* ================================================
+           CART HTML
+        ================================================ */
+
+        container.innerHTML = `
+
+            <div class="cart-layout">
+
+
+                <!-- ================================
+                     CART ITEMS
+                ================================= -->
+
+                <div class="cart-items">
+
+                    ${
+                        cart.map(
+                            (product, index) => {
+
+                                const productId =
+                                    getProductId(product);
+
+
+                                const name =
+                                    product.name ||
+                                    "Product";
+
+
+                                const category =
+                                    product.category ||
+                                    "General";
+
+
+                                const image =
+                                    product.image ||
+                                    "https://via.placeholder.com/400x400?text=Velmira";
+
+
+                                const price =
+                                    getPrice(
+                                        product.price
+                                    );
+
+
+                                const oldPrice =
+                                    getPrice(
+                                        product.oldPrice
+                                    );
+
+
+                                const quantity =
+                                    Number(
+                                        product.quantity
+                                    ) || 1;
+
+
+                                return `
+
+                                    <article
+                                        class="cart-item"
+                                        data-index="${index}">
+
+
+                                        <!-- IMAGE -->
+
+                                        <div
+                                            class="cart-item-image">
+
+                                            <a
+                                                href="product.html?id=${encodeURIComponent(productId)}">
+
+                                                <img
+                                                    src="${escapeHTML(image)}"
+                                                    alt="${escapeHTML(name)}"
+                                                    onerror="
+                                                        this.src='https://via.placeholder.com/400x400?text=Velmira';
+                                                    ">
+
+                                            </a>
+
+                                        </div>
+
+
+                                        <!-- INFO -->
+
+                                        <div
+                                            class="cart-item-info">
+
+                                            <span
+                                                class="cart-item-category">
+
+                                                ${escapeHTML(category)}
+
+                                            </span>
+
+
+                                            <h3>
+
+                                                <a
+                                                    href="product.html?id=${encodeURIComponent(productId)}"
+                                                    style="text-decoration:none;color:inherit;">
+
+                                                    ${escapeHTML(name)}
+
+                                                </a>
+
+                                            </h3>
+
+
+                                            <div>
+
+                                                <span
+                                                    class="cart-item-price">
+
+                                                    ₹${price.toLocaleString("en-IN")}
+
+                                                </span>
+
+
+                                                ${
+                                                    oldPrice > price
+                                                    ?
+                                                    `
+
+                                                    <del
+                                                        class="cart-item-old-price">
+
+                                                        ₹${oldPrice.toLocaleString("en-IN")}
+
+                                                    </del>
+
+                                                    `
+                                                    :
+                                                    ""
+                                                }
+
+                                            </div>
+
+
+                                            <!-- QUANTITY -->
+
+                                            <div
+                                                class="quantity-controls">
+
+
+                                                <button
+                                                    class="quantity-btn decrease"
+                                                    type="button"
+                                                    data-index="${index}">
+
+                                                    <i
+                                                        class="fa-solid fa-minus">
+                                                    </i>
+
+                                                </button>
+
+
+                                                <span
+                                                    class="quantity-number">
+
+                                                    ${quantity}
+
+                                                </span>
+
+
+                                                <button
+                                                    class="quantity-btn increase"
+                                                    type="button"
+                                                    data-index="${index}">
+
+                                                    <i
+                                                        class="fa-solid fa-plus">
+                                                    </i>
+
+                                                </button>
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- ACTION -->
+
+                                        <div
+                                            class="cart-item-actions">
+
+                                            <strong>
+
+                                                ₹${(
+                                                    price * quantity
+                                                ).toLocaleString("en-IN")}
+
+                                            </strong>
+
+
+                                            <button
+                                                class="remove-cart-item"
+                                                type="button"
+                                                data-index="${index}"
+                                                aria-label="Remove item">
+
+                                                <i
+                                                    class="fa-solid fa-trash">
+                                                </i>
+
+                                            </button>
+
+                                        </div>
+
+
+                                    </article>
+
+                                `;
+
+                            }
+
+                        ).join("")
+
+                    }
+
+                </div>
+
+
+                <!-- ================================
+                     SUMMARY
+                ================================= -->
+
+                <aside
+                    class="cart-summary">
+
+                    <h3>
+                        Order Summary
+                    </h3>
+
+
+                    <div
+                        class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span>
+                            ₹${subtotal.toLocaleString("en-IN")}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="summary-row">
+
+                        <span>
+                            Shipping
+                        </span>
+
+                        <span>
+
+                            ${
+                                shipping === 0
+                                ?
+                                "FREE"
+                                :
+                                "₹99"
+                            }
+
+                        </span>
+
+                    </div>
+
+
+                    ${
+                        subtotal < 999
+                        ?
+                        `
+                        <p style="
+                            font-size:13px;
+                            opacity:.65;
+                            margin-top:5px;
+                        ">
+
+                            Add ₹${(
+                                999 - subtotal
+                            ).toLocaleString("en-IN")}
+                            more for free shipping.
+
+                        </p>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <div
+                        class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span>
+                            ₹${total.toLocaleString("en-IN")}
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="checkout.html"
+                        class="btn primary checkout-btn">
+
+                        Proceed to Checkout
+
+                    </a>
+
+
+                    <a
+                        href="products.html"
+                        class="continue-shopping">
+
+                        Continue Shopping
+
+                    </a>
+
+                </aside>
+
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       CART BUTTON EVENTS
+    ===================================================== */
+
+    container.addEventListener(
+        "click",
+        event => {
+
+
+            /* =============================================
+               INCREASE
+            ============================================= */
+
+            const increase =
+                event.target.closest(
+                    ".increase"
+                );
+
+
+            if (increase) {
+
+                const index =
+                    Number(
+                        increase.dataset.index
+                    );
+
+
+                const cart =
+                    getCart();
+
+
+                if (!cart[index]) {
+
+                    return;
+
+                }
+
+
+                cart[index].quantity =
+                    (
+                        Number(
+                            cart[index].quantity
+                        ) || 1
+                    ) + 1;
+
+
+                saveCart(cart);
+
+                renderCart();
+
+                return;
+
+            }
+
+
+            /* =============================================
+               DECREASE
+            ============================================= */
+
+            const decrease =
+                event.target.closest(
+                    ".decrease"
+                );
+
+
+            if (decrease) {
+
+                const index =
+                    Number(
+                        decrease.dataset.index
+                    );
+
+
+                const cart =
+                    getCart();
+
+
+                if (!cart[index]) {
+
+                    return;
+
+                }
+
+
+                const quantity =
+                    Number(
+                        cart[index].quantity
+                    ) || 1;
+
+
+                if (quantity > 1) {
+
+                    cart[index].quantity =
+                        quantity - 1;
+
+                }
+
+                else {
+
+                    cart.splice(
+                        index,
+                        1
+                    );
+
+                }
+
+
+                saveCart(cart);
+
+                renderCart();
+
+                return;
+
+            }
+
+
+            /* =============================================
+               REMOVE
+            ============================================= */
+
+            const removeButton =
+                event.target.closest(
+                    ".remove-cart-item"
+                );
+
+
+            if (removeButton) {
+
+                const index =
+                    Number(
+                        removeButton.dataset.index
+                    );
+
+
+                const cart =
+                    getCart();
+
+
+                if (cart[index]) {
+
+                    cart.splice(
+                        index,
+                        1
+                    );
+
+                }
+
+
+                saveCart(cart);
+
+                renderCart();
+
+                return;
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    renderCart();
+
+    updateCartCount();
+
+});
+
+</script>
+
+
+</body>
+
+</html>
