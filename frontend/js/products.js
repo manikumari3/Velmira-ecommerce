@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
        CONFIG
     ===================================================== */
 
-    const API_URL = "http://localhost:5000/api/products";
+    const API_URL = "https://velmira-ecommerce.onrender.com/api/products";
 
 
     /* =====================================================
