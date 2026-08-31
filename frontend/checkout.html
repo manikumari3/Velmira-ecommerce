@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +16,6 @@
 
     <style>
 
-        /* =========================================
-           CHECKOUT
-        ========================================= */
-
         .checkout-section {
             padding: 50px 20px;
         }
@@ -32,11 +29,6 @@
             gap: 35px;
         }
 
-
-        /* =========================================
-           CHECKOUT BOX
-        ========================================= */
-
         .checkout-box {
             background: #fff;
             border-radius: 16px;
@@ -48,11 +40,6 @@
         .checkout-box h2 {
             margin-bottom: 22px;
         }
-
-
-        /* =========================================
-           FORM
-        ========================================= */
 
         .form-group {
             margin-bottom: 18px;
@@ -96,13 +83,7 @@
             grid-template-columns: 1fr 1fr;
 
             gap: 15px;
-
         }
-
-
-        /* =========================================
-           ORDER SUMMARY
-        ========================================= */
 
         .order-item {
 
@@ -115,7 +96,6 @@
             padding: 12px 0;
 
             border-bottom: 1px solid #eee;
-
         }
 
         .order-item img {
@@ -129,13 +109,10 @@
             border-radius: 10px;
 
             background: #f5f5f5;
-
         }
 
         .order-item-info {
-
             flex: 1;
-
         }
 
         .order-item-info h4 {
@@ -143,7 +120,6 @@
             margin: 0 0 5px;
 
             font-size: 14px;
-
         }
 
         .order-item-info p {
@@ -153,7 +129,6 @@
             font-size: 13px;
 
             opacity: .7;
-
         }
 
         .order-item-price {
@@ -161,13 +136,7 @@
             font-weight: 600;
 
             white-space: nowrap;
-
         }
-
-
-        /* =========================================
-           TOTAL
-        ========================================= */
 
         .summary-row {
 
@@ -176,7 +145,6 @@
             justify-content: space-between;
 
             margin: 15px 0;
-
         }
 
         .summary-row.total {
@@ -188,13 +156,7 @@
             font-size: 19px;
 
             font-weight: 700;
-
         }
-
-
-        /* =========================================
-           PLACE ORDER
-        ========================================= */
 
         .place-order-btn {
 
@@ -213,20 +175,13 @@
             font-weight: 600;
 
             margin-top: 15px;
-
         }
-
-
-        /* =========================================
-           EMPTY
-        ========================================= */
 
         .checkout-empty {
 
             text-align: center;
 
             padding: 70px 20px;
-
         }
 
         .checkout-empty i {
@@ -236,20 +191,13 @@
             opacity: .5;
 
             margin-bottom: 20px;
-
         }
-
-
-        /* =========================================
-           SUCCESS
-        ========================================= */
 
         .order-success {
 
             text-align: center;
 
             padding: 60px 20px;
-
         }
 
         .order-success i {
@@ -257,13 +205,11 @@
             font-size: 55px;
 
             margin-bottom: 20px;
-
         }
 
         .order-success h2 {
 
             margin-bottom: 10px;
-
         }
 
         .order-success p {
@@ -271,32 +217,20 @@
             opacity: .7;
 
             margin-bottom: 25px;
-
         }
-
-
-        /* =========================================
-           MOBILE
-        ========================================= */
 
         @media (max-width: 750px) {
 
             .checkout-container {
-
                 grid-template-columns: 1fr;
-
             }
 
             .form-row {
-
                 grid-template-columns: 1fr;
-
             }
 
             .checkout-box {
-
                 padding: 20px;
-
             }
 
         }
@@ -350,7 +284,9 @@
 
                 <i class="fa-solid fa-bag-shopping"></i>
 
-                <span>0</span>
+                <span id="cartCount">
+                    0
+                </span>
 
             </a>
 
@@ -403,8 +339,6 @@
         id="checkout-content"
         class="checkout-container">
 
-        <!-- JavaScript loads content -->
-
     </div>
 
 
@@ -454,6 +388,20 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+    const cartCount =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    /* =========================================
+       API
+    ========================================= */
+
+    const API_URL =
+        "https://velmira-ecommerce.onrender.com";
+
+
     /* =========================================
        GET USER
     ========================================= */
@@ -488,11 +436,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function getUserId() {
 
         if (!user) {
-
             return null;
-
         }
-
 
         return String(
 
@@ -514,11 +459,12 @@ document.addEventListener("DOMContentLoaded", () => {
        LOGIN CHECK
     ========================================= */
 
-    if (!userId) {
+    if (!userId || !user.email) {
 
         content.innerHTML = `
 
-            <div class="checkout-box checkout-empty">
+            <div class="checkout-box checkout-empty"
+                 style="grid-column:1/-1;">
 
                 <i class="fa-regular fa-user"></i>
 
@@ -596,39 +542,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       PRODUCT ID
-    ========================================= */
-
-    function getProductId(product) {
-
-        return String(
-
-            product.id ||
-            product._id ||
-            ""
-
-        );
-
-    }
-
-
-    /* =========================================
        PRICE
     ========================================= */
 
     function getPrice(value) {
 
         if (typeof value === "number") {
-
             return value;
-
         }
-
 
         return Number(
 
             String(value || "")
-
                 .replace(/[₹,\s]/g, "")
 
         ) || 0;
@@ -672,7 +597,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             content.innerHTML = `
 
-                <div class="checkout-box checkout-empty">
+                <div
+                    class="checkout-box checkout-empty"
+                    style="grid-column:1/-1;">
 
                     <i
                         class="fa-solid fa-bag-shopping">
@@ -743,14 +670,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /* =====================================
-           DISPLAY
+           DISPLAY CHECKOUT
         ===================================== */
 
         content.innerHTML = `
 
-            <!-- =================================
-                 CUSTOMER DETAILS
-            ================================== -->
+            <!-- CUSTOMER DETAILS -->
 
             <div class="checkout-box">
 
@@ -913,6 +838,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <button
                         type="submit"
+                        id="placeOrderButton"
                         class="btn primary place-order-btn">
 
                         <i
@@ -930,9 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-            <!-- =================================
-                 ORDER SUMMARY
-            ================================== -->
+            <!-- ORDER SUMMARY -->
 
             <div class="checkout-box">
 
@@ -1084,12 +1008,22 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
+        const placeOrderButton =
+            document.getElementById(
+                "placeOrderButton"
+            );
+
+
         form.addEventListener(
             "submit",
-            event => {
+            async event => {
 
                 event.preventDefault();
 
+
+                /* ==============================
+                   GET FORM VALUES
+                ============================== */
 
                 const fullName =
                     document.getElementById(
@@ -1100,7 +1034,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const email =
                     document.getElementById(
                         "email"
-                    ).value.trim();
+                    ).value.trim()
+                        .toLowerCase();
 
 
                 const phone =
@@ -1173,9 +1108,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
+                const cleanPhone =
+                    phone.replace(/\D/g, "");
+
+
                 if (
                     !/^\d{10}$/.test(
-                        phone.replace(/\D/g, "")
+                        cleanPhone
                     )
                 ) {
 
@@ -1189,200 +1128,396 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /* ==============================
-                   CREATE ORDER
+                   PREPARE PRODUCTS FOR BACKEND
                 ============================== */
 
-                const order = {
+                const backendProducts =
+                    cart.map(item => ({
 
-                    orderId:
-                        "VEL" +
-                        Date.now(),
-
-                    userId:
-                        userId,
-
-                    customer: {
+                        productId:
+                            item.productId ||
+                            item.id ||
+                            item._id,
 
                         name:
-                            fullName,
+                            item.name ||
+                            "Product",
 
-                        email:
-                            email,
+                        category:
+                            item.category ||
+                            "General",
 
-                        phone:
-                            phone
+                        price:
+                            getPrice(
+                                item.price
+                            ),
 
-                    },
+                        quantity:
+                            Number(
+                                item.quantity
+                            ) || 1,
 
-                    shippingAddress: {
+                        image:
+                            item.image ||
+                            ""
 
-                        address:
-                            address,
+                    }));
 
-                        city:
-                            city,
 
-                        state:
-                            state,
+                /* ==============================
+                   CHECK PRODUCT IDS
+                ============================== */
 
-                        pincode:
-                            pincode
+                const invalidProduct =
+                    backendProducts.some(
+                        product =>
+                            !product.productId
+                    );
 
-                    },
 
-                    items:
-                        cart,
+                if (invalidProduct) {
 
-                    subtotal:
-                        subtotal,
+                    alert(
+                        "One or more products have an invalid product ID. Please return to the products page and add them again."
+                    );
 
-                    shipping:
-                        shipping,
+                    return;
 
-                    total:
-                        total,
+                }
 
-                    paymentMethod:
-                        paymentMethod,
 
-                    status:
-                        "Placed",
+                /* ==============================
+                   CUSTOMER OBJECT
+                ============================== */
 
-                    createdAt:
-                        new Date().toISOString()
+                const customer = {
+
+                    name:
+                        fullName,
+
+                    email:
+                        email,
+
+                    phone:
+                        cleanPhone,
+
+                    address:
+                        address,
+
+                    city:
+                        city,
+
+                    state:
+                        state,
+
+                    pincode:
+                        pincode
 
                 };
 
 
                 /* ==============================
-                   SAVE ORDER LOCALLY
+                   DISABLE BUTTON
                 ============================== */
 
-                const ORDER_KEY =
-                    "velmiraOrders_" +
-                    userId;
+                placeOrderButton.disabled =
+                    true;
 
 
-                let orders = [];
+                placeOrderButton.innerHTML = `
+
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    Placing Order...
+
+                `;
 
 
                 try {
 
-                    orders =
-                        JSON.parse(
-                            localStorage.getItem(
-                                ORDER_KEY
-                            )
-                        ) || [];
 
-                } catch (error) {
+                    /* ==============================
+                       SEND ORDER TO MONGODB
+                    ============================== */
 
-                    orders = [];
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/orders`,
+                            {
 
-                }
+                                method: "POST",
 
+                                headers: {
 
-                orders.push(order);
+                                    "Content-Type":
+                                        "application/json"
 
+                                },
 
-                localStorage.setItem(
+                                body:
+                                    JSON.stringify({
 
-                    ORDER_KEY,
+                                        customer:
 
-                    JSON.stringify(
-                        orders
-                    )
+                                            customer,
 
-                );
+                                        products:
 
+                                            backendProducts,
 
-                /* ==============================
-                   CLEAR CART
-                ============================== */
+                                        totalAmount:
 
-                saveCart([]);
+                                            total
 
+                                    })
 
-                /* ==============================
-                   UPDATE CART COUNT
-                ============================== */
-
-                document
-                    .querySelectorAll(
-                        ".cart span"
-                    )
-                    .forEach(span => {
-
-                        span.textContent = "0";
-
-                    });
+                            }
+                        );
 
 
-                /* ==============================
-                   SUCCESS MESSAGE
-                ============================== */
-
-                content.innerHTML = `
-
-                    <div
-                        class="checkout-box order-success"
-                        style="grid-column:1/-1;">
-
-                        <i
-                            class="fa-solid fa-circle-check">
-                        </i>
+                    let data;
 
 
-                        <h2>
-                            Order Placed Successfully!
-                        </h2>
+                    try {
+
+                        data =
+                            await response.json();
+
+                    } catch {
+
+                        data = {};
+
+                    }
 
 
-                        <p>
-                            Thank you for shopping with Velmira.
-                        </p>
+                    /* ==============================
+                       BACKEND ERROR
+                    ============================== */
+
+                    if (!response.ok) {
+
+                        throw new Error(
+
+                            data.message ||
+                            "Failed to place order"
+
+                        );
+
+                    }
 
 
-                        <p>
-                            Order ID:
-                            <strong>
-                                ${escapeHTML(
-                                    order.orderId
-                                )}
-                            </strong>
-                        </p>
+                    /* ==============================
+                       SAVE LOCAL ORDER TOO
+                    ============================== */
+
+                    const localOrder = {
+
+                        orderId:
+                            data.order &&
+                            data.order._id
+                                ? String(
+                                    data.order._id
+                                )
+                                : "VEL" +
+                                  Date.now(),
+
+                        userId:
+                            userId,
+
+                        customer:
+                            customer,
+
+                        products:
+                            backendProducts,
+
+                        totalAmount:
+                            total,
+
+                        paymentMethod:
+                            paymentMethod,
+
+                        status:
+                            "Pending",
+
+                        createdAt:
+                            new Date().toISOString()
+
+                    };
 
 
-                        <div style="
-                            display:flex;
-                            gap:12px;
-                            justify-content:center;
-                            flex-wrap:wrap;
-                            margin-top:20px;
-                        ">
-
-                            <a
-                                href="products.html"
-                                class="btn primary">
-
-                                Continue Shopping
-
-                            </a>
+                    const ORDER_KEY =
+                        "velmiraOrders_" +
+                        userId;
 
 
-                            <a
-                                href="index.html"
-                                class="btn">
+                    let orders = [];
 
-                                Go Home
 
-                            </a>
+                    try {
+
+                        orders =
+                            JSON.parse(
+                                localStorage.getItem(
+                                    ORDER_KEY
+                                )
+                            ) || [];
+
+                    } catch {
+
+                        orders = [];
+
+                    }
+
+
+                    orders.push(
+                        localOrder
+                    );
+
+
+                    localStorage.setItem(
+
+                        ORDER_KEY,
+
+                        JSON.stringify(
+                            orders
+                        )
+
+                    );
+
+
+                    /* ==============================
+                       CLEAR CART
+                    ============================== */
+
+                    saveCart([]);
+
+
+                    /* ==============================
+                       UPDATE CART COUNT
+                    ============================== */
+
+                    if (cartCount) {
+
+                        cartCount.textContent =
+                            "0";
+
+                    }
+
+
+                    /* ==============================
+                       SUCCESS
+                    ============================== */
+
+                    const backendOrderId =
+                        data.order &&
+                        data.order._id
+                            ? String(
+                                data.order._id
+                            ).slice(-8)
+                            : localOrder.orderId;
+
+
+                    content.innerHTML = `
+
+                        <div
+                            class="checkout-box order-success"
+                            style="grid-column:1/-1;">
+
+                            <i
+                                class="fa-solid fa-circle-check">
+                            </i>
+
+
+                            <h2>
+                                Order Placed Successfully!
+                            </h2>
+
+
+                            <p>
+                                Thank you for shopping with Velmira.
+                            </p>
+
+
+                            <p>
+                                Order ID:
+
+                                <strong>
+                                    ${escapeHTML(
+                                        backendOrderId
+                                    )}
+                                </strong>
+                            </p>
+
+
+                            <div style="
+                                display:flex;
+                                gap:12px;
+                                justify-content:center;
+                                flex-wrap:wrap;
+                                margin-top:20px;
+                            ">
+
+                                <a
+                                    href="products.html"
+                                    class="btn primary">
+
+                                    Continue Shopping
+
+                                </a>
+
+
+                                <a
+                                    href="order-history.html"
+                                    class="btn">
+
+                                    View My Orders
+
+                                </a>
+
+
+                                <a
+                                    href="index.html"
+                                    class="btn">
+
+                                    Go Home
+
+                                </a>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    `;
 
-                `;
+
+                } catch (error) {
+
+
+                    console.error(
+                        "ORDER PLACEMENT ERROR:",
+                        error
+                    );
+
+
+                    alert(
+                        error.message ||
+                        "Unable to place order. Please try again."
+                    );
+
+
+                    placeOrderButton.disabled =
+                        false;
+
+
+                    placeOrderButton.innerHTML = `
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Place Order · ₹${total.toLocaleString("en-IN")}
+
+                    `;
+
+                }
 
             }
         );
