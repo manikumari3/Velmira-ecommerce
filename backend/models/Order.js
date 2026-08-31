@@ -1,249 +1,109 @@
+const mongoose = require("mongoose");
 
-const express = require("express");
-const Order = require("../models/Order");
+const orderSchema = new mongoose.Schema(
+    {
+        customer: {
+            name: {
+                type: String,
+                required: true,
+                trim: true
+            },
 
-const router = express.Router();
+            email: {
+                type: String,
+                required: true,
+                trim: true,
+                lowercase: true
+            },
 
+            phone: {
+                type: String,
+                required: true,
+                trim: true
+            },
 
-/* =========================================
-   PLACE ORDER
-========================================= */
+            address: {
+                type: String,
+                required: true,
+                trim: true
+            },
 
-router.post("/", async (req, res) => {
+            city: {
+                type: String,
+                required: true,
+                trim: true
+            },
 
-    try {
+            state: {
+                type: String,
+                required: true,
+                trim: true
+            },
 
-        const {
-            customer,
-            products,
-            totalAmount
-        } = req.body;
+            pincode: {
+                type: String,
+                required: true,
+                trim: true
+            }
+        },
 
+        products: [
+            {
+                productId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Product",
+                    required: true
+                },
 
-        /* =========================
-           VALIDATION
-        ========================= */
+                name: {
+                    type: String,
+                    required: true
+                },
 
-        if (
-            !customer ||
-            !customer.name ||
-            !customer.email ||
-            !customer.phone ||
-            !customer.address ||
-            !customer.city ||
-            !customer.state ||
-            !customer.pincode
-        ) {
+                category: {
+                    type: String
+                },
 
-            return res.status(400).json({
-                message: "Complete customer details are required"
-            });
+                price: {
+                    type: Number,
+                    required: true
+                },
 
+                quantity: {
+                    type: Number,
+                    required: true,
+                    default: 1,
+                    min: 1
+                },
+
+                image: {
+                    type: String
+                }
+            }
+        ],
+
+        totalAmount: {
+            type: Number,
+            required: true,
+            min: 0
+        },
+
+        status: {
+            type: String,
+            enum: [
+                "Pending",
+                "Confirmed",
+                "Shipped",
+                "Delivered",
+                "Cancelled"
+            ],
+            default: "Pending"
         }
+    },
 
-
-        if (
-            !Array.isArray(products) ||
-            products.length === 0
-        ) {
-
-            return res.status(400).json({
-                message: "At least one product is required"
-            });
-
-        }
-
-
-        if (
-            totalAmount === undefined ||
-            totalAmount === null ||
-            Number(totalAmount) < 0
-        ) {
-
-            return res.status(400).json({
-                message: "Valid total amount is required"
-            });
-
-        }
-
-
-        /* =========================
-           NORMALIZE CUSTOMER EMAIL
-        ========================= */
-
-        customer.email =
-            customer.email
-                .trim()
-                .toLowerCase();
-
-
-        /* =========================
-           CREATE ORDER
-        ========================= */
-
-        const order = new Order({
-
-            customer,
-
-            products,
-
-            totalAmount:
-                Number(totalAmount)
-
-        });
-
-
-        /* =========================
-           SAVE TO MONGODB
-        ========================= */
-
-        const savedOrder =
-            await order.save();
-
-
-        console.log(
-            "ORDER SAVED:",
-            savedOrder._id.toString(),
-            savedOrder.customer.email
-        );
-
-
-        /* =========================
-           RESPONSE
-        ========================= */
-
-        return res.status(201).json({
-
-            message:
-                "Order placed successfully",
-
-            order:
-                savedOrder
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "ORDER CREATE ERROR:",
-            error
-        );
-
-
-        return res.status(500).json({
-
-            message:
-                "Failed to place order",
-
-            error:
-                error.message
-
-        });
-
+    {
+        timestamps: true
     }
+);
 
-});
-
-
-
-/* =========================================
-   GET CUSTOMER ORDER HISTORY
-========================================= */
-
-router.get("/", async (req, res) => {
-
-    try {
-
-        /* =========================
-           GET EMAIL FROM URL
-        ========================= */
-
-        const email =
-            req.query.email;
-
-
-        /* =========================
-           CHECK EMAIL
-        ========================= */
-
-        if (!email) {
-
-            return res.status(400).json({
-
-                message:
-                    "Customer email is required"
-
-            });
-
-        }
-
-
-        /* =========================
-           NORMALIZE EMAIL
-        ========================= */
-
-        const normalizedEmail =
-            email
-                .trim()
-                .toLowerCase();
-
-
-        /* =========================
-           FIND CUSTOMER ORDERS
-        ========================= */
-
-        const orders =
-            await Order
-                .find({
-                    "customer.email":
-                        normalizedEmail
-                })
-                .sort({
-                    createdAt: -1
-                });
-
-
-        /* =========================
-           LOG
-        ========================= */
-
-        console.log(
-            `ORDER HISTORY: ${normalizedEmail} → ${orders.length} orders`
-        );
-
-
-        /* =========================
-           RESPONSE
-        ========================= */
-
-        return res.json(
-            orders
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "ORDER FETCH ERROR:",
-            error
-        );
-
-
-        return res.status(500).json({
-
-            message:
-                "Failed to fetch orders",
-
-            error:
-                error.message
-
-        });
-
-    }
-
-});
-
-
-module.exports = router;
-
+module.exports = mongoose.model("Order", orderSchema);

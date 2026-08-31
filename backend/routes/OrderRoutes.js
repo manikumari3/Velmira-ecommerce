@@ -1,4 +1,3 @@
-```js
 const express = require("express");
 const Order = require("../models/Order");
 
@@ -114,46 +113,20 @@ router.post("/", async (req, res) => {
 
 
 /* =========================================
-   GET CUSTOMER ORDERS
+   GET ALL ORDERS
 ========================================= */
 
 router.get("/", async (req, res) => {
 
     try {
 
-        const email = req.query.email;
+        const orders =
+            await Order
+                .find()
+                .sort({
+                    createdAt: -1
+                });
 
-
-        /* =========================
-           VALIDATE EMAIL
-        ========================= */
-
-        if (!email) {
-
-            return res.status(400).json({
-                message: "Customer email is required"
-            });
-
-        }
-
-
-        /* =========================
-           FIND CUSTOMER ORDERS
-        ========================= */
-
-        const orders = await Order
-            .find({
-                "customer.email":
-                    email.trim().toLowerCase()
-            })
-            .sort({
-                createdAt: -1
-            });
-
-
-        /* =========================
-           RESPONSE
-        ========================= */
 
         res.json(orders);
 
@@ -176,4 +149,3 @@ router.get("/", async (req, res) => {
 
 
 module.exports = router;
-```
