@@ -248,8 +248,47 @@ document.addEventListener(
             );
 
 
-            const response =
-                await fetch(API_URL);
+           const user =
+    JSON.parse(
+        localStorage.getItem("velmiraUser")
+    );
+
+if (!user || !user.email) {
+
+    ordersContainer.innerHTML = `
+
+        <div class="empty-cart">
+
+            <i class="fa-solid fa-user-lock"></i>
+
+            <h2>
+                Please login first
+            </h2>
+
+            <p>
+                Login to view your order history.
+            </p>
+
+            <a
+                href="login.html"
+                class="btn primary">
+
+                Login
+
+            </a>
+
+        </div>
+
+    `;
+
+    return;
+}
+
+
+const response =
+    await fetch(
+        `${API_URL}?email=${encodeURIComponent(user.email)}`
+    );
 
 
             if (!response.ok) {
